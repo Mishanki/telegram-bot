@@ -5,7 +5,7 @@ namespace app\modules\v1\actions\hook;
 use app\modules\v1\core\Action;
 use app\services\HookService;
 
-class SetHookAction extends Action
+class UnsetHookAction extends Action
 {
     /* @var $service HookService */
     public $service;
@@ -20,6 +20,6 @@ class SetHookAction extends Action
      */
     public function run(): string
     {
-        return $this->service->setHook();
+        return $this->service->unsetHook();
     }
 }

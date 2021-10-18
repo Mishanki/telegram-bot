@@ -7,6 +7,9 @@ use Longman\TelegramBot\Telegram;
 
 class HookService
 {
+    /**
+     * @return string
+     */
     public function setHook(): string
     {
         try {
@@ -23,6 +26,24 @@ class HookService
              return $e->getMessage();
         }
 
-        return 'string';
+        return 'Error while set hook';
+    }
+
+    /**
+     * @return string
+     */
+    public function unsetHook(): string
+    {
+        try {
+            // Create Telegram API object
+            $telegram = new Telegram(getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_USER_NAME'));
+
+            // Unset / delete the webhook
+            $result = $telegram->deleteWebhook();
+
+            return $result->getDescription();
+        } catch (TelegramException $e) {
+            return $e->getMessage();
+        }
     }
 }

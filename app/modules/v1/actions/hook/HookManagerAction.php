@@ -6,7 +6,7 @@ use app\modules\v1\core\Action;
 use app\services\HookService;
 use app\services\MessageService;
 
-class HookAction extends Action
+class HookManagerAction extends Action
 {
     /* @var $service HookService */
     public $service;
