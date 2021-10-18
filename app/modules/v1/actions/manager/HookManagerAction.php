@@ -22,10 +22,10 @@ class HookManagerAction extends Action
 
     public function run(): string
     {
-//        $msg = $this->sensor->getMessage();
-//
-//        return $this->manager->sendSimpleMessage($msg);
+        $msg = $this->sensor->getMessage();
 
-        return $this->manager->hook();
+        return $this->manager->sendSimpleMessage($msg);
+
+//        return $this->manager->hook();
     }
 }

@@ -42,7 +42,9 @@ class ManagerService
             $telegram->addCommandClass(StartCommand::class);
 
             // Requests Limiter (tries to prevent reaching Telegram API limits)
-//            $telegram->enableLimiter($config['limiter']);
+            $telegram->enableLimiter([
+                'enabled' => true,
+            ]);
 
             // Handle telegram webhook request
             $telegram->handle();
