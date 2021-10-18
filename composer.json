@@ -1,0 +1,18 @@
+{
+  "autoload": {
+    "psr-4": {
+      "app\\":"app/"
+    }
+  },
+  "require": {
+    "longman/telegram-bot": "^0.74.0",
+    "vlucas/phpdotenv": "^5.3"
+  },
+  "require-dev": {
+  },
+  "config": {
+    "preferred-install": "dist",
+    "disable-tls": true,
+    "secure-http": false
+  }
+}
