@@ -16,11 +16,11 @@ class HookService
             // Set webhook
             $result = $telegram->setWebhook(getenv('TELEGRAM_HOOK_URL'));
             if ($result->isOk()) {
-                echo $result->getDescription();
+                return $result->getDescription();
             }
         } catch (TelegramException $e) {
             // log telegram errors
-             echo $e->getMessage();
+             return $e->getMessage();
         }
 
         return 'string';
