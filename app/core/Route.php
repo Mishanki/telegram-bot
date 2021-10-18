@@ -15,6 +15,8 @@ class Route
 
     private function init()
     {
-        (Dotenv::createUnsafeImmutable('./'))->load();
+        if (file_exists('.env')) {
+            (Dotenv::createUnsafeImmutable(dirname(__DIR__, 2)))->load();
+        }
     }
 }
