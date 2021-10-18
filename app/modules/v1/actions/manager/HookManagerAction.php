@@ -3,27 +3,27 @@
 namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
-use app\services\HookService;
-use app\services\MessageService;
+use app\services\ManagerService;
+use app\services\SensorService;
 
 class HookManagerAction extends Action
 {
-    /* @var $service HookService */
-    public $service;
+    /* @var $manager ManagerService */
+    public $manager;
 
-    /* @var $message MessageService */
-    public $message;
+    /* @var $sensor SensorService */
+    public $sensor;
 
     public function init()
     {
-        $this->service = new HookService();
-        $this->message = new MessageService();
+        $this->manager = new ManagerService();
+        $this->sensor = new SensorService();
     }
 
     public function run(): bool
     {
-        $url = 'https://api.telegram.org/bot'.getenv('TELEGRAM_BOT_TOKEN').'/sendMessage?chat_id='.getenv('TELEGRAM_CHAT_ID').'&text=Hello';
+        $msg = $this->sensor->getMessage();
 
-        return file_get_contents($url);
+        return $this->manager->sendSimpleMessage($msg);
     }
 }
