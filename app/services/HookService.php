@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use app\commands\StartCommand;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 
@@ -15,6 +16,8 @@ class HookService
         try {
             // Create Telegram API object
             $telegram = new Telegram(getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_USER_NAME'));
+
+            $telegram->addCommandClass(StartCommand::class);
 
             // Set webhook
             $result = $telegram->setWebhook(getenv('TELEGRAM_HOOK_URL'));

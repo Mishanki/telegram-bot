@@ -20,10 +20,12 @@ class HookManagerAction extends Action
         $this->sensor = new SensorService();
     }
 
-    public function run(): bool
+    public function run(): string
     {
-        $msg = $this->sensor->getMessage();
+//        $msg = $this->sensor->getMessage();
+//
+//        return $this->manager->sendSimpleMessage($msg);
 
-        return $this->manager->sendSimpleMessage($msg);
+        return $this->manager->sendSimpleMessage();
     }
 }
