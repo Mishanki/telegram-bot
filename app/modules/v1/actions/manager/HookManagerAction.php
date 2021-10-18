@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\v1\actions\hook;
+namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
 use app\services\HookService;
