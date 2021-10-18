@@ -10,13 +10,13 @@ class Route
     {
         $this->init();
 
-        echo getenv('TELEGRAM_CHAT_ID');
+
     }
 
     private function init()
     {
-        if (file_exists('.env')) {
-            (Dotenv::createUnsafeImmutable(dirname(__DIR__, 2)))->load();
+        if (file_exists('./.env')) {
+            (Dotenv::createUnsafeImmutable('./'))->load();
         }
     }
 }
