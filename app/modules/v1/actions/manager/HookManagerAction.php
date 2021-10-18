@@ -26,6 +26,6 @@ class HookManagerAction extends Action
 //
 //        return $this->manager->sendSimpleMessage($msg);
 
-        return $this->manager->sendSimpleMessage();
+        return $this->manager->hook();
     }
 }
