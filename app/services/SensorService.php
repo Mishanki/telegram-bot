@@ -38,11 +38,11 @@ class SensorService
      */
     private function formatter(array $data): string
     {
-        $msg = 'Данные PM 2.5:' . PHP_EOL;
+        $msg = 'Данные PM 2.5:' . PHP_EOL . PHP_EOL;
         $type = ' µg/m³';
         foreach ($data['data'] ?? [] as $district => $items) {
             foreach ($items as $street => $val) {
-                $msg .= $district .', '.$street.': '. $val . $type . PHP_EOL;
+                $msg .= ' - '. $district .', '.$street.': '. $val . $type . PHP_EOL;
             }
         }
 
