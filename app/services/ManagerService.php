@@ -40,6 +40,10 @@ class ManagerService
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(HelpCommand::class);
 
+            $telegram->enableLimiter([
+                'enabled' => true,
+            ]);
+
             // Handle telegram webhook request
             $telegram->handle();
         } catch (TelegramException $e) {
