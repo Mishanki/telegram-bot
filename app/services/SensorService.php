@@ -6,14 +6,29 @@ use Exception;
 
 class SensorService
 {
+    public $ids = [65998, 66091, 65545, 58146];
+
     public $sensors = [
-        'Лобня' => [
-            'Катюшки' => 65998,
-            'Лобня Сити' => 66091,
+        1 => [
+            'city' => 'Лобня',
+            'str' => 'Катюшки',
+            'sid' => 65998,
         ],
-        'Хлебниково' => [
-            'Ленинградская ул.' => 65545,
+        [
+            'city' => 'Лобня',
+            'str' => 'Лобня Сити',
+            'sid' => 66091,
         ],
+        [
+            'city' => 'Хлебниково',
+            'str' => 'Ленинградская ул.',
+            'sid' => 65545,
+        ],
+        [
+            'city' => 'Долгопрудный',
+            'str' => 'пр-т Ракетостроителей',
+            'sid' => 58146,
+        ]
     ];
 
     public function getMessage(): string
@@ -21,7 +36,7 @@ class SensorService
         $file = './cache.json';
         if (file_exists($file)) {
             $data = json_decode(file_get_contents($file),true);
-            if ($data['time'] > (time() - 30)) {
+            if ($data['time'] > (time() - 45)) {
                return $this->formatter($data);
             }
         }
@@ -38,15 +53,47 @@ class SensorService
      */
     private function formatter(array $data): string
     {
-        $msg = 'Данные PM 2.5:' . PHP_EOL . PHP_EOL;
-        $type = ' µg/m³';
-        foreach ($data['data'] ?? [] as $district => $items) {
-            foreach ($items as $street => $val) {
-                $msg .= ' - '. $district .', '.$street.': '. $val . $type . PHP_EOL;
+        $type = 'µg/m³';
+        $msg[0] = 'Данные PM 2.5 за последние 5 мин:';
+
+        foreach ($data['data'] as $senId => $items) {
+            foreach ($items as $time => $v) {
+                foreach ($this->sensors as $num => $sensor) {
+                    if ($sensor['sid'] == $senId) {
+                        $msg[$num][$time] = [
+                            'city' => $sensor['city'],
+                            'str' => $sensor['str'],
+                            'value' => $v,
+                        ];
+//                        break 2;
+                    }
+                }
             }
         }
 
-        return $msg;
+        ksort($msg);
+
+        $result = '';
+        foreach ($msg as $items) {
+            if (!is_array($items)) {
+                $result .= $items . PHP_EOL . PHP_EOL;
+              continue;
+            }
+            $tmp = '';
+            foreach ($items as $time => $item) {
+
+                if (empty($tmp) || !empty($tmp) && $tmp != $item['city'] . $item['str']) {
+                    $tmp = $item['city'] . $item['str'];
+                    $result .= $item['city'] . ', ' . $item['str'] . PHP_EOL;
+                }
+
+                $shortTime = date('H:i:s', strtotime($time));
+                $result .=  $shortTime . ' - ' . $item['value'] . ' ' . $type . PHP_EOL;
+            }
+            $result .= PHP_EOL;
+        }
+
+        return $result;
     }
 
     /**
@@ -55,16 +102,21 @@ class SensorService
      */
     private function getData(): array
     {
-        foreach ($this->sensors as $district => $data) {
-            foreach ($data as $street => $id) {
-                if (!$json = file_get_contents(getenv('SENSOR_COMMUNITY_HOST'). $id .'/')) {
-                    throw new Exception('Json is empty');
+        if(!$json = file_get_contents(getenv('SENSOR_COMMUNITY_HOST'))) {
+            throw new Exception('Json is empty');
+        }
+
+        $data = json_decode($json, true);
+        $result = [];
+        foreach ($data as $item) {
+            $id = $item['sensor']['id'] ?? null;
+            $time = $item['timestamp'] ?? null;
+            $pmVal = $item['sensordatavalues'][1]['value'] ?? null;
+            if (in_array($id, $this->ids)) {
+                if (!empty($result[$id])) {
+//                    continue;
                 }
-                $temp = json_decode($json, true);
-                if(!$val = $temp[0]['sensordatavalues'][1]['value'] ?? null) {
-                    continue;
-                }
-                $result['data'][$district][$street] = $val;
+                $result['data'][$id][$time] = $pmVal;
             }
         }
 

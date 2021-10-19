@@ -36,6 +36,8 @@ class HookManagerAction extends Action
         $this->manager->hook();
 
 //        $data = $this->sensor->getMessage();
+//        $this->manager->sendSimpleMessage($data);
+//        echo $data;
 
         return '';
     }
