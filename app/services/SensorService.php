@@ -7,8 +7,7 @@ use Exception;
 
 class SensorService
 {
-    public $ids = [65998, 66091, 65545, 58146];
-
+    public $ids = [65998, 66091, 32407, 53559, 58146, 49089];
     public $sensors = [
         1 => [
             'city' => 'Лобня',
