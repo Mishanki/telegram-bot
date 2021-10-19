@@ -48,7 +48,10 @@ class SensorService
                     throw new Exception('Json is empty');
                 }
                 $temp = json_decode($json, true);
-                $data[$district] = $temp[0]['sensordatavalues'][1]['value'] ?? null;
+                if(!$val = $temp[0]['sensordatavalues'][1]['value'] ?? null) {
+                    continue;
+                }
+                $data[$district] = $val;
             }
         }
 

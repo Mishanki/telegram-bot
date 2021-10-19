@@ -2,6 +2,9 @@
 
 namespace app\services;
 
+use app\commands\GenericCommand;
+use app\commands\HelpCommand;
+use app\commands\InfoCommand;
 use app\commands\StartCommand;
 use app\network\HTTPService;
 use Longman\TelegramBot\Exception\TelegramException;
@@ -32,12 +35,10 @@ class ManagerService
             // Create Telegram API object
             $telegram = new Telegram(getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_USER_NAME'));
 
-//            $result = Request::sendMessage([
-//                'chat_id' => getenv('TELEGRAM_CHAT_ID'),
-//                'text'    => 'Your utf8 text 😜 ...',
-//            ]);
-
             $telegram->addCommandClass(StartCommand::class);
+            $telegram->addCommandClass(InfoCommand::class);
+            $telegram->addCommandClass(GenericCommand::class);
+            $telegram->addCommandClass(HelpCommand::class);
 
             // Handle telegram webhook request
             $telegram->handle();
