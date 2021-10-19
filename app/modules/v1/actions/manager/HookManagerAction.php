@@ -23,7 +23,15 @@ class HookManagerAction extends Action
     public function run(): string
     {
         $msg = file_get_contents('php://input');
-        $this->manager->sendSimpleMessage($msg);
+        $msg = json_decode($msg, true);
+
+        $data['last_name'] = $msg['message']['from']['last_name'] ?? null;
+        $data['first_name'] = $msg['message']['from']['first_name'] ?? null;
+        $data['username'] = $msg['message']['from']['username'] ?? null;
+        $data['text'] = $msg['message']['text'] ?? null;
+        $data = json_encode($data, JSON_PRETTY_PRINT);
+
+        $this->manager->sendSimpleMessage($data);
 
         $this->manager->hook();
 
