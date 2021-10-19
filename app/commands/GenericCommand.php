@@ -46,6 +46,7 @@ class GenericCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
+        echo __CLASS__;
         $message = $this->getMessage();
         $user_id = $message->getFrom()->getId();
         $command = $message->getCommand();

@@ -22,13 +22,10 @@ class HookManagerAction extends Action
 
     public function run(): string
     {
-//        $msg = $this->sensor->getMessage();
-
         $msg = file_get_contents('php://input');
+        $this->manager->sendSimpleMessage($msg);
 
-        return $this->manager->sendSimpleMessage($msg);
-
-//        $this->manager->hook();
+        $this->manager->hook();
 
         return '';
     }
