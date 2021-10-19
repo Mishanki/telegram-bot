@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use DateTimeZone;
 use Exception;
 
 class SensorService
@@ -87,8 +88,9 @@ class SensorService
                     $result .= $item['city'] . ', ' . $item['str'] . PHP_EOL;
                 }
 
-                $shortTime = date('H:i:s', strtotime($time));
-                $result .=  $shortTime . ' - ' . $item['value'] . ' ' . $type . PHP_EOL;
+                $dateObj = new \DateTime($time.'UTC');
+                $dateObj->setTimezone(new DateTimeZone('Europe/Moscow'));
+                $result .=  $dateObj->format('H:i:s') . ' - ' . $item['value'] . ' ' . $type . PHP_EOL;
             }
             $result .= PHP_EOL;
         }
