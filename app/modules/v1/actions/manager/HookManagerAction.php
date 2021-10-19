@@ -25,14 +25,11 @@ class HookManagerAction extends Action
         $msg = file_get_contents('php://input');
         $msg = json_decode($msg, true);
 
-        $data['last_name'] = $msg['message']['from']['last_name'] ?? null;
-        $data['first_name'] = $msg['message']['from']['first_name'] ?? null;
-        $data['username'] = $msg['message']['from']['username'] ?? null;
-        $data['text'] = $msg['message']['text'] ?? null;
-        $data = json_encode($data, JSON_PRETTY_PRINT);
+        $username = $msg['message']['from']['username'] ?? null;
+        $text = $msg['message']['text'] ?? null;
+        $data = $username . ':' . $text;
 
         $this->manager->sendSimpleMessage($data);
-
         $this->manager->hook();
 
 //        $data = $this->sensor->getMessage();
