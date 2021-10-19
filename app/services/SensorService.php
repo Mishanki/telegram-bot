@@ -13,6 +13,9 @@ class SensorService
         'Лобня Сити' => [
             66091
         ],
+        'Хлебниково' => [
+            65545
+        ]
     ];
 
     public function getMessage(): string
