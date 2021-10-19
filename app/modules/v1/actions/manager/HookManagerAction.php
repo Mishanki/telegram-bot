@@ -24,11 +24,11 @@ class HookManagerAction extends Action
     {
 //        $msg = $this->sensor->getMessage();
 
-//        $msg = file_get_contents('php://input');
+        $msg = file_get_contents('php://input');
 
-//        return $this->manager->sendSimpleMessage($msg);
+        return $this->manager->sendSimpleMessage($msg);
 
-        $this->manager->hook();
+//        $this->manager->hook();
 
         return '';
     }
