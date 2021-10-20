@@ -61,7 +61,6 @@ class StartCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        echo __CLASS__;
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
 

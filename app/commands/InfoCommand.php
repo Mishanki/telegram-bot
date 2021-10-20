@@ -62,7 +62,6 @@ class InfoCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        echo __CLASS__;
         $service = new SensorService();
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
