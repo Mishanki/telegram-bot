@@ -105,7 +105,8 @@ class SensorService
             $result .= PHP_EOL;
         }
 
-        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /info и он пришлёт Вам свежие данные.' . PHP_EOL;
+        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /info и он пришлёт Вам свежие данные.' . PHP_EOL. PHP_EOL;
+        $result .= 'https://aircms.online/' . PHP_EOL;
 
         return $result;
     }
