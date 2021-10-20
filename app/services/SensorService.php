@@ -60,6 +60,7 @@ class SensorService
     /**
      * @param array $data
      * @return string
+     * @throws Exception
      */
     private function formatter(array $data): string
     {
@@ -103,6 +104,8 @@ class SensorService
             }
             $result .= PHP_EOL;
         }
+
+        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /info и он пришлёт Вам свежие данные.' . PHP_EOL;
 
         return $result;
     }
