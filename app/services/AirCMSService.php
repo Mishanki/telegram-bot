@@ -121,27 +121,28 @@ class AirCMSService
         switch ($direction)
         {
             case 'n':
-                $direction = 'с';
+                $direction = 'с ↓';
                 break;
             case 'e':
-                $direction = 'в';
+                $direction = 'в ←';
                 break;
             case 's':
-                $direction = 'ю';
+                $direction = 'ю ↑';
                 break;
             case 'w':
-                $direction = 'з';
+                $direction = 'з →';
                 break;
             case 'sw':
-                $direction = 'юз';
+                $direction = 'юз ↗';
                 break;
             case 'se':
-                $direction = 'юв';
+                $direction = 'юв ↖';
+                break;
             case 'nw':
-                $direction = 'сз';
+                $direction = 'сз ↘';
                 break;
             case 'ne':
-                $direction = 'св';
+                $direction = 'св ↙';
                 break;
             default:
                 break;
