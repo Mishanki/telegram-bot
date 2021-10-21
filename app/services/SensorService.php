@@ -64,8 +64,8 @@ class SensorService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Мониторинг воздуха' .PHP_EOL;
-        $msg[0] = 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут' .PHP_EOL;
+        $msg[0] = 'Мониторинг воздуха.' .PHP_EOL;
+        $msg[0] .= 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут.' .PHP_EOL;
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {

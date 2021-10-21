@@ -82,7 +82,7 @@ class AirCMSService
         ksort($msg);
 
         $type = 'мкг/ куб. м.';
-        $resultMsg = 'Мониторинг воздуха' . PHP_EOL . PHP_EOL;
+        $resultMsg = 'Мониторинг воздуха.' . PHP_EOL . PHP_EOL;
         $tmpCity = null;
         foreach ($msg as $item) {
 
