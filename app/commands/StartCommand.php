@@ -63,9 +63,9 @@ class StartCommand extends SystemCommand
     {
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
-
         return $this->replyToChat(
-            'Привет!' . PHP_EOL . PHP_EOL .
+            'Мониторинг воздуха' . PHP_EOL . PHP_EOL .
+
             '/help - список команд бота'
         );
     }

@@ -64,7 +64,7 @@ class SensorService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Среднее pm 2.5 за последние 5 минут:';
+        $msg[0] = 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут:';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
