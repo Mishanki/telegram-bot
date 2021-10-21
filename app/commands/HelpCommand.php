@@ -66,7 +66,7 @@ class HelpCommand extends SystemCommand
         return $this->replyToChat(
             'Данные pm 2.5 µg/m³' . PHP_EOL .
             '/info - среднее за последние 5 минут'.PHP_EOL .
-            '/avg среднее за последний час'
+            '/history среднее за последний час'
         );
     }
 }

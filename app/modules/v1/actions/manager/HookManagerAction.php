@@ -4,7 +4,7 @@ namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
 use app\services\ManagerService;
-use app\services\SensorAvgService;
+use app\services\SensorHistoryService;
 use app\services\SensorService;
 
 class HookManagerAction extends Action
@@ -27,7 +27,7 @@ class HookManagerAction extends Action
         $this->manager->hook();
 
 //        $data = (new SensorService())->getMessage();
-//        $data = (new SensorAvgService())->getMessage();
+//        $data = (new SensorHistoryService())->getMessage();
 //        $this->manager->sendSimpleMessage($data);
 //        echo $data;
 

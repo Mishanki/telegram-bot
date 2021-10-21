@@ -2,7 +2,6 @@
 
 namespace app\services;
 
-use app\commands\AvgCommand;
 use app\commands\GenericCommand;
 use app\commands\HelpCommand;
 use app\commands\InfoCommand;
@@ -38,7 +37,7 @@ class ManagerService
 
             $telegram->addCommandClass(StartCommand::class);
             $telegram->addCommandClass(InfoCommand::class);
-            $telegram->addCommandClass(AvgCommand::class);
+            $telegram->addCommandClass(SensorHistoryService::class);
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(HelpCommand::class);
 

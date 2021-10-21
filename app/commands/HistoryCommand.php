@@ -22,27 +22,27 @@
 
 namespace app\commands;
 
-use app\services\SensorAvgService;
+use app\services\SensorHistoryService;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 
-class AvgCommand extends SystemCommand
+class HistoryCommand extends SystemCommand
 {
     /**
      * @var string
      */
-    protected $name = 'avg';
+    protected $name = 'history';
 
     /**
      * @var string
      */
-    protected $description = 'Average  command';
+    protected $description = 'History  command';
 
     /**
      * @var string
      */
-    protected $usage = '/avg';
+    protected $usage = '/history';
 
     /**
      * @var string
@@ -62,7 +62,7 @@ class AvgCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        $service = new SensorAvgService();
+        $service = new SensorHistoryService();
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(

@@ -5,7 +5,7 @@ namespace app\services;
 use DateTimeZone;
 use Exception;
 
-class SensorAvgService
+class SensorHistoryService
 {
     public $sensors = [
         1 => [
@@ -64,7 +64,7 @@ class SensorAvgService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Данные PM 2.5, среднее значение за 1 час:';
+        $msg[0] = 'Данные PM 2.5, среднее значение за последний час:';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
@@ -104,7 +104,7 @@ class SensorAvgService
             $result .= PHP_EOL;
         }
 
-        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /history и он пришлёт Вам среднее значение за 1 час.' . PHP_EOL. PHP_EOL;
+        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /history и он пришлёт Вам среднее значение за последний час.' . PHP_EOL. PHP_EOL;
         $result .= 'https://aircms.online/' . PHP_EOL;
 
         return $result;
