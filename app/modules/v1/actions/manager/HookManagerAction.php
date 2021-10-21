@@ -3,6 +3,7 @@
 namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
+use app\services\AirCMSService;
 use app\services\ManagerService;
 use app\services\SensorService;
 
@@ -26,6 +27,7 @@ class HookManagerAction extends Action
         $this->manager->hook();
 
 //        $data = (new SensorService())->getMessage();
+//        $data = (new AirCMSService())->getMessage();
 //        $this->manager->sendSimpleMessage($data);
 //        echo $data;
 

@@ -120,6 +120,8 @@ class Route
 
     private function init()
     {
+        date_default_timezone_set('Europe/Moscow');
+
         if (file_exists('./.env')) {
             (Dotenv::createUnsafeImmutable('./'))->load();
         }

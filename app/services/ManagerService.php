@@ -6,6 +6,7 @@ use app\commands\GenericCommand;
 use app\commands\HelpCommand;
 use app\commands\InfoCommand;
 use app\commands\StartCommand;
+use app\commands\WeaherCommand;
 use app\network\HTTPService;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
@@ -37,6 +38,7 @@ class ManagerService
 
             $telegram->addCommandClass(StartCommand::class);
             $telegram->addCommandClass(InfoCommand::class);
+            $telegram->addCommandClass(WeaherCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(HelpCommand::class);
 
