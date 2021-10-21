@@ -54,9 +54,13 @@ class AirCMSService
      */
     public function getMessage(): string
     {
-        $data = $this->getData();
+        try {
+            $data = $this->getData();
 
-        return $this->formatter($data);
+            return $this->formatter($data);
+        } catch (\Throwable $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -90,7 +94,7 @@ class AirCMSService
             $resultMsg .= 'PM 2.5  -  ' . $this->getMarkDownValue($item['sds_p2']) . ' ' . $type . PHP_EOL;
             $resultMsg .= 'PM 10   -  ' . $item['sds_p1'] . ' ' . $type . PHP_EOL;
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
-            $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . '%' . PHP_EOL;
+            $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . ' %' . PHP_EOL;
             $resultMsg .= 'Давл-е  -  ' . $item['pressure'] . ' мм рт. ст.'. PHP_EOL;
             $resultMsg .= 'Ветер   -  ' . $this->windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
 
