@@ -87,8 +87,8 @@ class AirCMSService
                 $resultMsg .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
             }
 
-            $resultMsg .= 'PM 2.5  -  ' . $item['sds_p1'] . ' ' . $type . PHP_EOL;
-            $resultMsg .= 'PM 10   -  ' . $item['sds_p2'] . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 2.5  -  ' . $item['sds_p2'] . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 10   -  ' . $item['sds_p1'] . ' ' . $type . PHP_EOL;
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
             $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . '%' . PHP_EOL;
             $resultMsg .= 'Давл-е  -  ' . $item['pressure'] . ' мм рт. ст.'. PHP_EOL;
