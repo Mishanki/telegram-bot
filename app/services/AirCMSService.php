@@ -105,8 +105,9 @@ class AirCMSService
 
         }
 
-        $resultMsg .= 'Отправьте боту @PmLobnyaBot в личном сообщении /help и он пришлёт Вам список команд.' . PHP_EOL. PHP_EOL;
-        $resultMsg .= 'https://aircms.online/' . PHP_EOL;
+        $resultMsg .= 'Отправьте боту @PmLobnyaBot в личном сообщении /help';
+//        $resultMsg .= PHP_EOL. PHP_EOL;
+//        $resultMsg .= 'https://aircms.online/' . PHP_EOL;
 
         return $resultMsg;
     }
@@ -155,7 +156,6 @@ class AirCMSService
      */
     private function getData(): array
     {
-        var_dump(getenv('AIRCMS_API_HOST').'?T=0'); die();
         if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0')) {
             throw new \Exception('Json is empty');
         }
