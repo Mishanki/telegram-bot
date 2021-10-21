@@ -45,7 +45,7 @@ class SensorService
         $file = './cache.json';
         if (file_exists($file)) {
             $data = json_decode(file_get_contents($file),true);
-            if ($data['time'] > (time() - 45)) {
+            if ($data['time'] > (time() - 45) && !empty($data['data'])) {
                return $this->formatter($data);
             }
         }
@@ -64,7 +64,7 @@ class SensorService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Среднее pm 2.5 за последние 5 минут:';
+        $msg[0] = 'Среднее pm 2.5 за последние *5 минут*:';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {

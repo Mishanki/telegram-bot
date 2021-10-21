@@ -67,6 +67,9 @@ class InfoCommand extends SystemCommand
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
             $service->getMessage(),
+            [
+                'parse_mode' => 'markdown',
+            ]
         );
     }
 }
