@@ -42,7 +42,7 @@ class SensorHistoryService
 
     public function getMessage(): string
     {
-        $file = './avg_cache.json';
+        $file = './history_cache.json';
         if (file_exists($file)) {
             $data = json_decode(file_get_contents($file),true);
             if ($data['time'] > (time() - 45)) {
