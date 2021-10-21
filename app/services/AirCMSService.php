@@ -39,7 +39,7 @@ class AirCMSService
 
     public function getDevices()
     {
-        $data = file_get_contents('http://aircms.online/php/guiapi.php?devices');
+        $data = file_get_contents(getenv('AIRCMS_API_HOST'));
 
         echo '<pre>';
         print_r($data);
@@ -49,7 +49,7 @@ class AirCMSService
     }
 
     /**
-     * @return array[]
+     * @return string
      * @throws \Exception
      */
     public function getMessage(): string
@@ -87,7 +87,7 @@ class AirCMSService
                 $resultMsg .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
             }
 
-            $resultMsg .= 'PM 2.5  -  ' . $item['sds_p2'] . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 2.5  -  ' . $this->getMarkDownValue($item['sds_p2']) . ' ' . $type . PHP_EOL;
             $resultMsg .= 'PM 10   -  ' . $item['sds_p1'] . ' ' . $type . PHP_EOL;
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
             $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . '%' . PHP_EOL;
@@ -103,6 +103,19 @@ class AirCMSService
         $resultMsg .= 'https://aircms.online/' . PHP_EOL;
 
         return $resultMsg;
+    }
+
+    /**
+     * @param float $val
+     * @return string
+     */
+    private function getMarkDownValue(float $val): string
+    {
+        if ($val >= 20) {
+            $val = '*'.$val.'*';
+        }
+
+        return $val;
     }
 
     /**
@@ -149,12 +162,16 @@ class AirCMSService
      */
     private function getData(): array
     {
-        if(!$json = file_get_contents('http://aircms.online/php/guiapi.php?T=0')) {
+        if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0')) {
             throw new \Exception('Json is empty');
         }
 
         $ids = $this->getIds();
         $data = json_decode($json, true);
+
+        if (empty($data['data'])) {
+            throw new \Exception('Data is not found');
+        }
 
         foreach ($data['data'] ?? [] as $item) {
             $id = $item['device_id'] ?? null;
