@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use app\utils\ThresholdUtils;
 use DateTimeZone;
 use Exception;
 
@@ -65,7 +66,7 @@ class SensorService
     {
         $type = 'µg/m³';
         $msg[0] = 'Мониторинг воздуха.' .PHP_EOL;
-        $msg[0] .= 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут.' .PHP_EOL;
+        $msg[0] .= 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут.';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
@@ -100,7 +101,7 @@ class SensorService
 
                 $dateObj = new \DateTime($time.'UTC');
                 $dateObj->setTimezone(new DateTimeZone('Europe/Moscow'));
-                $result .=  $dateObj->format('H:i:s') . ' - ' . $this->getMarkDownValue($item['value']) . ' ' . $type . PHP_EOL;
+                $result .=  $dateObj->format('H:i:s') . ' - ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . $type . PHP_EOL;
             }
             $result .= PHP_EOL;
         }
@@ -109,19 +110,6 @@ class SensorService
         $result .= 'https://aircms.online/' . PHP_EOL;
 
         return $result;
-    }
-
-    /**
-     * @param float $val
-     * @return string
-     */
-    private function getMarkDownValue(float $val): string
-    {
-        if ($val >= 20) {
-            $val = '*'.$val.'*';
-        }
-
-        return $val;
     }
 
     /**

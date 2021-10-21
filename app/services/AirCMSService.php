@@ -2,6 +2,8 @@
 
 namespace app\services;
 
+use app\utils\ThresholdUtils;
+
 class AirCMSService
 {
     public $sensors = [
@@ -91,8 +93,8 @@ class AirCMSService
                 $resultMsg .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
             }
 
-            $resultMsg .= 'PM 2.5  -  ' . $this->getMarkDownValue($item['sds_p2']) . ' ' . $type . PHP_EOL;
-            $resultMsg .= 'PM 10   -  ' . $item['sds_p1'] . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['sds_p2']) . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 10   -  ' . ThresholdUtils::markdownPm10($item['sds_p1']) . ' ' . $type . PHP_EOL;
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
             $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . ' %' . PHP_EOL;
             $resultMsg .= 'Давл-е  -  ' . $item['pressure'] . ' мм рт. ст.'. PHP_EOL;
@@ -107,19 +109,6 @@ class AirCMSService
         $resultMsg .= 'https://aircms.online/' . PHP_EOL;
 
         return $resultMsg;
-    }
-
-    /**
-     * @param float $val
-     * @return string
-     */
-    private function getMarkDownValue(float $val): string
-    {
-        if ($val >= 20) {
-            $val = '*'.$val.'*';
-        }
-
-        return $val;
     }
 
     /**
