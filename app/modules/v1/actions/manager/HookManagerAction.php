@@ -26,7 +26,6 @@ class HookManagerAction extends Action
         $this->manager->hook();
 
 //        $data = (new SensorService())->getMessage();
-//        $data = (new SensorHistoryService())->getMessage();
 //        $this->manager->sendSimpleMessage($data);
 //        echo $data;
 

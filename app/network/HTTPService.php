@@ -13,6 +13,7 @@ class HTTPService
         return file_get_contents($this->getBotWithToken().'?'.http_build_query([
                 'chat_id' => getenv('TELEGRAM_CHAT_ID'),
                 'text' => $msg,
+                'parse_mode' => 'markdown'
             ]));
     }
 
