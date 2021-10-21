@@ -4,6 +4,7 @@ namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
 use app\services\ManagerService;
+use app\services\SensorHistoryService;
 use app\services\SensorService;
 
 class HookManagerAction extends Action
@@ -11,13 +12,9 @@ class HookManagerAction extends Action
     /* @var $manager ManagerService */
     public $manager;
 
-    /* @var $sensor SensorService */
-    public $sensor;
-
     public function init()
     {
         $this->manager = new ManagerService();
-        $this->sensor = new SensorService();
     }
 
     public function run(): string
@@ -29,7 +26,8 @@ class HookManagerAction extends Action
         $this->manager->sendSimpleMessage($msg);
         $this->manager->hook();
 
-//        $data = $this->sensor->getMessage();
+//        $data = (new SensorService())->getMessage();
+//        $data = (new SensorHistoryService())->getMessage();
 //        $this->manager->sendSimpleMessage($data);
 //        echo $data;
 

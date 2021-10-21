@@ -5,7 +5,7 @@ namespace app\services;
 use DateTimeZone;
 use Exception;
 
-class SensorService
+class SensorHistoryService
 {
     public $sensors = [
         1 => [
@@ -27,22 +27,12 @@ class SensorService
             'city' => 'Хлебниково',
             'str' => 'Новое шоссе, 12',
             'sid' => 53559,
-        ],
-        [
-            'city' => 'Долгопрудный',
-            'str' => 'пр-т Ракетостроителей, 5',
-            'sid' => 58146,
-        ],
-        [
-            'city' => 'Долгопрудный',
-            'str' => 'Долгопрудная аллея, 15К5',
-            'sid' => 49089,
         ]
     ];
 
     public function getMessage(): string
     {
-        $file = './cache.json';
+        $file = './history_cache.json';
         if (file_exists($file)) {
             $data = json_decode(file_get_contents($file),true);
             if ($data['time'] > (time() - 45)) {
@@ -64,7 +54,7 @@ class SensorService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Данные PM 2.5 за последние 5 мин:';
+        $msg[0] = 'Данные PM 2.5 за последний час:';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
@@ -104,7 +94,7 @@ class SensorService
             $result .= PHP_EOL;
         }
 
-        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /info и он пришлёт Вам свежие данные.' . PHP_EOL. PHP_EOL;
+        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /history и он пришлёт Вам данные за последний час.' . PHP_EOL. PHP_EOL;
         $result .= 'https://aircms.online/' . PHP_EOL;
 
         return $result;
@@ -116,7 +106,7 @@ class SensorService
      */
     private function getData(): array
     {
-        if(!$json = file_get_contents(getenv('SENSOR_COMMUNITY_HOST'))) {
+        if(!$json = file_get_contents(getenv('SENSOR_COMMUNITY_HOST_HISTORY'))) {
             throw new Exception('Json is empty');
         }
 
