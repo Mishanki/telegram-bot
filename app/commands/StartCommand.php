@@ -66,7 +66,7 @@ class StartCommand extends SystemCommand
         return $this->replyToChat(
             'Мониторинг воздуха' . PHP_EOL . PHP_EOL .
 
-            '/help - список команд бота'
+            '/help - список команд'
         );
     }
 }
