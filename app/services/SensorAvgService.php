@@ -5,7 +5,7 @@ namespace app\services;
 use DateTimeZone;
 use Exception;
 
-class SensorHistoryService
+class SensorAvgService
 {
     public $sensors = [
         1 => [
@@ -27,12 +27,22 @@ class SensorHistoryService
             'city' => 'Хлебниково',
             'str' => 'Новое шоссе, 12',
             'sid' => 53559,
+        ],
+        [
+            'city' => 'Долгопрудный',
+            'str' => 'пр-т Ракетостроителей, 5',
+            'sid' => 58146,
+        ],
+        [
+            'city' => 'Долгопрудный',
+            'str' => 'Долгопрудная аллея, 15К5',
+            'sid' => 49089,
         ]
     ];
 
     public function getMessage(): string
     {
-        $file = './history_cache.json';
+        $file = './avg_cache.json';
         if (file_exists($file)) {
             $data = json_decode(file_get_contents($file),true);
             if ($data['time'] > (time() - 45)) {
@@ -54,7 +64,7 @@ class SensorHistoryService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Данные PM 2.5 за последний час:';
+        $msg[0] = 'Данные PM 2.5, среднее значение за 1 час:';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
@@ -94,7 +104,7 @@ class SensorHistoryService
             $result .= PHP_EOL;
         }
 
-        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /history и он пришлёт Вам данные за последний час.' . PHP_EOL. PHP_EOL;
+        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /history и он пришлёт Вам среднее значение за 1 час.' . PHP_EOL. PHP_EOL;
         $result .= 'https://aircms.online/' . PHP_EOL;
 
         return $result;
