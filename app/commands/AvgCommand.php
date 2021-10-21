@@ -32,7 +32,7 @@ class AvgCommand extends SystemCommand
     /**
      * @var string
      */
-    protected $name = 'average ';
+    protected $name = 'avg';
 
     /**
      * @var string

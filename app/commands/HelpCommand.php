@@ -64,8 +64,9 @@ class HelpCommand extends SystemCommand
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
-            'Type /info to see pm2.5!'.PHP_EOL .
-            'Type /avg to see pm2.5! average dust sensors of the last hour'
+            'Данные pm 2.5 µg/m³' . PHP_EOL .
+            '/info - среднее за последние 5 минут'.PHP_EOL .
+            '/avg среднее за последний час'
         );
     }
 }
