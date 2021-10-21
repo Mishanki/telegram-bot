@@ -4,7 +4,6 @@ namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
 use app\services\ManagerService;
-use app\services\SensorHistoryService;
 use app\services\SensorService;
 
 class HookManagerAction extends Action

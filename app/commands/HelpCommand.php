@@ -64,9 +64,8 @@ class HelpCommand extends SystemCommand
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
-            'Данные pm 2.5 µg/m³' . PHP_EOL .
-            '/info - среднее за последние 5 минут'.PHP_EOL .
-            '/history - среднее за последний час'
+            'Данные pm 2.5 µg/m³'  . PHP_EOL . PHP_EOL .
+            '/info - среднее за последние 5 минут'.PHP_EOL
         );
     }
 }

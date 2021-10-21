@@ -4,7 +4,6 @@ namespace app\services;
 
 use app\commands\GenericCommand;
 use app\commands\HelpCommand;
-use app\commands\HistoryCommand;
 use app\commands\InfoCommand;
 use app\commands\StartCommand;
 use app\network\HTTPService;
@@ -38,7 +37,6 @@ class ManagerService
 
             $telegram->addCommandClass(StartCommand::class);
             $telegram->addCommandClass(InfoCommand::class);
-            $telegram->addCommandClass(HistoryCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(HelpCommand::class);
 
