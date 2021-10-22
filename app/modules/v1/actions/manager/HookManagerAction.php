@@ -21,7 +21,7 @@ class HookManagerAction extends Action
     {
         $msg = file_get_contents('php://input');
         $msg = json_decode($msg, true);
-        $msg = json_encode($msg, JSON_PRETTY_PRINT);
+        $msg = json_encode($msg, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 
         $this->manager->sendSimpleMessage($msg);
         $this->manager->hook();
