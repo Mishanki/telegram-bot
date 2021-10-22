@@ -37,10 +37,10 @@ class ThresholdUtils
     public static function windPowerBeaufort(float $val): string
     {
         switch ($val) {
-            case $val == 0:
+            case $val > 0 && $val <= 0.2:
                 $name = 'штиль';
                 break;
-            case $val > 0 && $val < 1.6:
+            case $val >= 0.3 && $val <= 1.5:
                 $name = 'тихий';
                 break;
             case $val >= 1.6 && $val <= 3.3:
@@ -61,7 +61,7 @@ class ThresholdUtils
             case $val >= 13.9 && $val <= 17.1:
                 $name = 'крепкий';
                 break;
-            case $val >= 17.2 && $val <= 20:
+            case $val >= 17.2 && $val <= 20.7:
                 $name = 'очень крепкий';
                 break;
             case $val >= 20.8 && $val <= 24.4:
