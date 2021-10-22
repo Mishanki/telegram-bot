@@ -5,6 +5,7 @@ namespace app\services;
 use app\commands\GenericCommand;
 use app\commands\HelpCommand;
 use app\commands\InfoCommand;
+use app\commands\Pm1Command;
 use app\commands\Pm24Command;
 use app\commands\PmCommand;
 use app\commands\StartCommand;
@@ -40,6 +41,7 @@ class ManagerService
 
             $telegram->addCommandClass(StartCommand::class);
             $telegram->addCommandClass(PmCommand::class);
+            $telegram->addCommandClass(Pm1Command::class);
             $telegram->addCommandClass(Pm24Command::class);
             $telegram->addCommandClass(WeaherCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
