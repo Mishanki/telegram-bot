@@ -41,7 +41,7 @@ class AirCMSService
     {
         foreach ($data as $senId => $item) {
             foreach ((new SensorPmObject())->getSensors() as $num => $sensor) {
-                if ($sensor['sidInternal'] == $senId) {
+                if ($sensor['airCmsId'] == $senId) {
                     $item['city'] = $sensor['city'] ?? null;
                     $item['str'] = $sensor['str'] ?? null;
                     $msg[$num] = $item;
@@ -152,7 +152,7 @@ class AirCMSService
     private function getIds(): array
     {
         foreach ((new SensorPmObject())->getSensors() as $item) {
-            $ids[] = $item['sidInternal'];
+            $ids[] = $item['airCmsId'];
         }
 
         return $ids ?? [];
