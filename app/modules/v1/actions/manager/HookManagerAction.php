@@ -6,6 +6,7 @@ use app\modules\v1\core\Action;
 use app\services\AirCMSService;
 use app\services\ManagerService;
 use app\services\SensorService;
+use app\services\SensorPm24Service;
 
 class HookManagerAction extends Action
 {

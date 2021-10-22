@@ -6,7 +6,7 @@ use app\utils\ThresholdUtils;
 use DateTimeZone;
 use Exception;
 
-class SensorService
+class SensorPm24Service
 {
     public $sensors = [
         1 => [
@@ -43,7 +43,7 @@ class SensorService
 
     public function getMessage(): string
     {
-        $file = './cache.json';
+        $file = './cache24.json';
         if (file_exists($file)) {
             $data = json_decode(file_get_contents($file),true);
             if ($data['time'] > (time() - 45) && !empty($data['data'])) {
@@ -68,7 +68,7 @@ class SensorService
     private function formatter(array $data): string
     {
         $type = 'мкг/ куб. м.';
-        $msg[0] = 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут';
+        $msg[0] = 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 24 часа';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
@@ -103,7 +103,7 @@ class SensorService
 
                 $dateObj = new \DateTime($time.'UTC');
                 $dateObj->setTimezone(new DateTimeZone('Europe/Moscow'));
-                $result .= 'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . $type . PHP_EOL;
+                $result .=  'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . $type . PHP_EOL;
             }
             $result .= PHP_EOL;
         }
@@ -121,7 +121,7 @@ class SensorService
      */
     private function getData(): array
     {
-        if(!$json = file_get_contents(getenv('SENSOR_COMMUNITY_HOST'))) {
+        if(!$json = file_get_contents(getenv('SENSOR_COMMUNITY_HOST_HISTORY'))) {
             throw new Exception('Json is empty');
         }
 
