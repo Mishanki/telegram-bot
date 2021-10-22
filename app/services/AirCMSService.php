@@ -2,43 +2,11 @@
 
 namespace app\services;
 
+use app\services\objects\SensorPmObject;
 use app\utils\ThresholdUtils;
 
 class AirCMSService
 {
-    public $sensors = [
-        1 => [
-            'city' => 'Лобня',
-            'str' => 'ул. Юности, 1',
-            'sid' => 741,
-        ],
-        [
-            'city' => 'Лобня',
-            'str' => 'ул. Борисова, 14',
-            'sid' => 745,
-        ],
-        [
-            'city' => 'Долгопрудный',
-            'str' => 'Ленинградская ул., 5/2с1',
-            'sid' => 219,
-        ],
-        [
-            'city' => 'Долгопрудный',
-            'str' => 'Новое шоссе, 12',
-            'sid' => 515,
-        ],
-        [
-            'city' => 'Долгопрудный',
-            'str' => 'пр-т Ракетостроителей, 5',
-            'sid' => 589,
-        ],
-        [
-            'city' => 'Долгопрудный',
-            'str' => 'Долгопрудная аллея, 15к5',
-            'sid' => 442,
-        ]
-    ];
-
     public function getDevices()
     {
         $data = file_get_contents(getenv('AIRCMS_API_HOST').'?devices');
@@ -72,8 +40,8 @@ class AirCMSService
     private function formatter(array $data): string
     {
         foreach ($data as $senId => $item) {
-            foreach ($this->sensors as $num => $sensor) {
-                if ($sensor['sid'] == $senId) {
+            foreach ((new SensorPmObject())->getSensors() as $num => $sensor) {
+                if ($sensor['sidInternal'] == $senId) {
                     $item['city'] = $sensor['city'] ?? null;
                     $item['str'] = $sensor['str'] ?? null;
                     $msg[$num] = $item;
@@ -183,8 +151,8 @@ class AirCMSService
      */
     private function getIds(): array
     {
-        foreach ($this->sensors as $item) {
-            $ids[] = $item['sid'];
+        foreach ((new SensorPmObject())->getSensors() as $item) {
+            $ids[] = $item['sidInternal'];
         }
 
         return $ids ?? [];
