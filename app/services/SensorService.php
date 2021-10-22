@@ -65,8 +65,7 @@ class SensorService
     private function formatter(array $data): string
     {
         $type = 'µg/m³';
-        $msg[0] = 'Мониторинг воздуха.' .PHP_EOL;
-        $msg[0] .= 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут.';
+        $msg[0] = 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут';
 
         foreach ($data['data'] as $senId => $items) {
             foreach ($items as $time => $v) {
@@ -106,7 +105,10 @@ class SensorService
             $result .= PHP_EOL;
         }
 
-        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении /help';
+        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении:'. PHP_EOL;
+        $result .= '/pm - среднее PM 2.5 µg/m за последние 5 минут'.PHP_EOL;
+        $result .= '/weather - общий мониторинг воздуха'.PHP_EOL;
+        $result .= '/help - список команд'. PHP_EOL;
 //        $result .= PHP_EOL. PHP_EOL;
 //        $result .= 'https://aircms.online/' . PHP_EOL;
 

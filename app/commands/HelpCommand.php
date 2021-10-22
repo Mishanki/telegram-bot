@@ -65,7 +65,7 @@ class HelpCommand extends SystemCommand
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
             'Список команд мониторинга'  . PHP_EOL . PHP_EOL .
-            '/info - среднее PM 2.5 µg/m за последние 5 минут'.PHP_EOL.
+            '/pm - среднее PM 2.5 µg/m за последние 5 минут'.PHP_EOL.
             '/weather - общий мониторинг воздуха'.PHP_EOL
         );
     }

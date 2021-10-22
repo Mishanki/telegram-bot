@@ -84,7 +84,7 @@ class AirCMSService
         ksort($msg);
 
         $type = 'мкг/ куб. м.';
-        $resultMsg = 'Мониторинг воздуха.' . PHP_EOL . PHP_EOL;
+        $resultMsg = 'Мониторинг воздуха' . PHP_EOL . PHP_EOL;
         $tmpCity = null;
         foreach ($msg as $item) {
 
@@ -98,14 +98,16 @@ class AirCMSService
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
             $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . ' %' . PHP_EOL;
             $resultMsg .= 'Давл-е  -  ' . $item['pressure'] . ' мм рт. ст.'. PHP_EOL;
-            $resultMsg .= 'Ветер   -  ' . $this->windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
-
+            $resultMsg .= 'Ветер ('.ThresholdUtils::windPowerBeaufort($item['wind_speed']).')  -  ' . $this->windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
 
             $resultMsg .=  PHP_EOL;
 
         }
 
-        $resultMsg .= 'Отправьте боту @PmLobnyaBot в личном сообщении /help';
+        $resultMsg .= 'Отправьте боту @PmLobnyaBot в личном сообщении:'. PHP_EOL;
+        $resultMsg .= '/pm - среднее PM 2.5 µg/m за последние 5 минут'.PHP_EOL;
+        $resultMsg .= '/weather - общий мониторинг воздуха'.PHP_EOL;
+        $resultMsg .= '/help - список команд'. PHP_EOL;
 //        $resultMsg .= PHP_EOL. PHP_EOL;
 //        $resultMsg .= 'https://aircms.online/' . PHP_EOL;
 
@@ -121,28 +123,28 @@ class AirCMSService
         switch ($direction)
         {
             case 'n':
-                $direction = 'с 🡓';
+                $direction = 'с';
                 break;
             case 'e':
-                $direction = 'в 🡐';
+                $direction = 'в';
                 break;
             case 's':
-                $direction = 'ю 🡑';
+                $direction = 'ю';
                 break;
             case 'w':
-                $direction = 'з 🡒';
+                $direction = 'з';
                 break;
             case 'sw':
-                $direction = 'юз 🡕';
+                $direction = 'юз';
                 break;
             case 'se':
-                $direction = 'юв 🡔';
+                $direction = 'юв';
                 break;
             case 'nw':
-                $direction = 'сз 🡖';
+                $direction = 'сз';
                 break;
             case 'ne':
-                $direction = 'св 🡗';
+                $direction = 'св';
                 break;
             default:
                 break;

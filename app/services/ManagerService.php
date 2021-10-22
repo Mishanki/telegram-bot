@@ -4,7 +4,7 @@ namespace app\services;
 
 use app\commands\GenericCommand;
 use app\commands\HelpCommand;
-use app\commands\InfoCommand;
+use app\commands\PmCommand;
 use app\commands\StartCommand;
 use app\commands\WeaherCommand;
 use app\network\HTTPService;
@@ -37,7 +37,7 @@ class ManagerService
             $telegram = new Telegram(getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_USER_NAME'));
 
             $telegram->addCommandClass(StartCommand::class);
-            $telegram->addCommandClass(InfoCommand::class);
+            $telegram->addCommandClass(PmCommand::class);
             $telegram->addCommandClass(WeaherCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(HelpCommand::class);

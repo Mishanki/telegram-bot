@@ -27,22 +27,22 @@ use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 
-class InfoCommand extends SystemCommand
+class PmCommand extends SystemCommand
 {
     /**
      * @var string
      */
-    protected $name = 'info';
+    protected $name = 'pm';
 
     /**
      * @var string
      */
-    protected $description = 'Info command';
+    protected $description = 'PM command';
 
     /**
      * @var string
      */
-    protected $usage = '/info';
+    protected $usage = '/pm';
 
     /**
      * @var string
