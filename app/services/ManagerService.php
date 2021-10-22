@@ -4,6 +4,7 @@ namespace app\services;
 
 use app\commands\GenericCommand;
 use app\commands\HelpCommand;
+use app\commands\InfoCommand;
 use app\commands\PmCommand;
 use app\commands\StartCommand;
 use app\commands\WeaherCommand;
@@ -41,6 +42,7 @@ class ManagerService
             $telegram->addCommandClass(WeaherCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(HelpCommand::class);
+            $telegram->addCommandClass(InfoCommand::class);
 
             $telegram->enableLimiter([
                 'enabled' => true,

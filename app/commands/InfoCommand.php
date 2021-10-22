@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * This file is part of the PHP Telegram Bot example-bot package.
+ * https://github.com/php-telegram-bot/example-bot/
+ *
+ * (c) PHP Telegram Bot Team
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * Start command
+ *
+ * Gets executed when a user first starts using the bot.
+ *
+ * When using deep-linking, the parameter can be accessed by getting the command text.
+ *
+ * @see https://core.telegram.org/bots#deep-linking
+ */
+
+namespace app\commands;
+
+use app\services\AirCMSService;
+use app\services\SensorService;
+use Longman\TelegramBot\Commands\SystemCommand;
+use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Exception\TelegramException;
+
+class InfoCommand extends SystemCommand
+{
+    /**
+     * @var string
+     */
+    protected $name = 'info';
+
+    /**
+     * @var string
+     */
+    protected $description = 'Info command';
+
+    /**
+     * @var string
+     */
+    protected $usage = '/info';
+
+    /**
+     * @var string
+     */
+    protected $version = '1.2.0';
+
+    /**
+     * @var bool
+     */
+    protected $private_only = false;
+
+    /**
+     * Main command execution
+     *
+     * @return ServerResponse
+     * @throws TelegramException
+     */
+    public function execute(): ServerResponse
+    {
+        // If you use deep-linking, get the parameter like this:
+        // $deep_linking_parameter = $this->getMessage()->getText(true);
+        return $this->replyToChat(
+            'Частицы PM 2.5 – взвешенные твердые микрочастицы и мельчайшие капельки жидкости (10 нм - 2,5 мкм в диаметре), содержащиеся в воздухе.' . PHP_EOL. PHP_EOL.
+            'PM 2.5 длительное время находятся во взвешенном состоянии и практически не оседают. Именно они представляют наибольший риск для здоровья человека, так как проникают в легкие и оказывают негативное воздействие на жизненно важные внутренние органы человека.' . PHP_EOL . PHP_EOL .
+            'По данным ВОЗ среднесуточный уровень PM 2.5 в воздухе не должен превышать 25 мкг/м.куб., а среднегодовой – не более 10  мкг/м.куб. Относительно уровня PM 10 величины следующие: среднесуточный – не более 50 мкг/м.куб, а среднегодовой – не более 25 мкг/м.куб',
+            [
+                'parse_mode' => 'markdown',
+            ]
+        );
+    }
+}
