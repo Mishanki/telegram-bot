@@ -27,7 +27,7 @@ use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 
-class PmCommand extends SystemCommand
+class Pm24Command extends SystemCommand
 {
     /**
      * @var string
