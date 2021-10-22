@@ -2,7 +2,6 @@
 
 namespace app\services;
 
-use app\commands\StartCommand;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 

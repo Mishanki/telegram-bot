@@ -3,7 +3,6 @@
 namespace app\services;
 
 use app\models\dictionary\MeasurementDictionary as MD;
-use Exception;
 
 class SensorService extends SensorBaseService
 {
@@ -37,22 +36,8 @@ class SensorService extends SensorBaseService
         return $this->header;
     }
 
-    /**
-     * @return string
-     * @throws Exception
-     */
     public function getMessage(): string
     {
-        if($data = $this->getCacheMessageData($this->getCacheFile(), $this->getCacheExp())) {
-            return $this->formatter($data, $this->getHeader());
-        }
-
-        $data = $this->getData(getenv('SENSOR_COMMUNITY_HOST'));
-        if (empty($data['data'])) {
-            return 'Data is not found';
-        }
-        $this->setCacheMessageData($this->getCacheFile(), $data);
-
-        return $this->formatter($data, $this->getHeader());
+        return $this->getMsg(getenv('SENSOR_COMMUNITY_HOST'));
     }
 }

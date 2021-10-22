@@ -11,6 +11,25 @@ use Exception;
 class SensorBaseService
 {
     /**
+     * @param string $host
+     * @return string
+     * @throws Exception
+     */
+    public function getMsg(string $host): string
+    {
+        if($data = $this->getCacheMessageData($this->getCacheFile(), $this->getCacheExp())) {
+            return $this->formatter($data, $this->getHeader());
+        }
+
+        $data = $this->getData($host);
+        if (empty($data['data'])) {
+            return 'Data is not found';
+        }
+        $this->setCacheMessageData($this->getCacheFile(), $data);
+
+        return $this->formatter($data, $this->getHeader());
+    }
+    /**
      * @param string $cacheFile
      * @param int $exp
      * @return array|null

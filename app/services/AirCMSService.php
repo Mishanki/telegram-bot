@@ -106,9 +106,6 @@ class AirCMSService
 
         $resultMsg .= file_get_contents('app/tpl/footer');
 
-//        $resultMsg .= PHP_EOL. PHP_EOL;
-//        $resultMsg .= 'https://aircms.online/' . PHP_EOL;
-
         return $resultMsg;
     }
 
