@@ -52,6 +52,9 @@ class SensorService
         }
 
         $data = $this->getData();
+        if (empty($data['data'])) {
+            return 'Data is not found';
+        }
         file_put_contents($file, json_encode($data, JSON_UNESCAPED_UNICODE));
 
         return $this->formatter($data);
@@ -64,7 +67,7 @@ class SensorService
      */
     private function formatter(array $data): string
     {
-        $type = 'µg/m³';
+        $type = 'мкг/ куб. м.';
         $msg[0] = 'Средняя концентрация взвешенных частиц PM 2.5 '.$type.' за последние 5 минут';
 
         foreach ($data['data'] as $senId => $items) {
@@ -95,7 +98,7 @@ class SensorService
 
                 if (empty($tmp) || !empty($tmp) && $tmp != $item['city'] . $item['str']) {
                     $tmp = $item['city'] . $item['str'];
-                    $result .= $item['city'] . ', ' . $item['str'] . PHP_EOL;
+                    $result .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
                 }
 
                 $dateObj = new \DateTime($time.'UTC');
