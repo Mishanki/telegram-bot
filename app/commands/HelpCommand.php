@@ -64,10 +64,7 @@ class HelpCommand extends SystemCommand
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
-            'Список команд мониторинга'  . PHP_EOL . PHP_EOL .
-            '/pm - среднее PM 2.5 µg/m за последние 5 минут'.PHP_EOL.
-            '/weather - общий мониторинг воздуха'.PHP_EOL.
-            '/info - полезная информация'.PHP_EOL
-        );
+            file_get_contents('app/tpl/footer')
+    );
     }
 }

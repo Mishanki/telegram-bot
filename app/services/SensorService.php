@@ -108,11 +108,7 @@ class SensorService
             $result .= PHP_EOL;
         }
 
-        $result .= 'Отправьте боту @PmLobnyaBot в личном сообщении:'. PHP_EOL;
-        $result .= '/pm - среднее PM 2.5 за последние 5 минут'.PHP_EOL;
-        $result .= '/weather - общий мониторинг воздуха'.PHP_EOL;
-        $result .= '/info - полезная информация'.PHP_EOL;
-        $result .= '/help - список команд'. PHP_EOL;
+        $result .= file_get_contents('app/tpl/footer');
 //        $result .= PHP_EOL. PHP_EOL;
 //        $result .= 'https://aircms.online/' . PHP_EOL;
 

@@ -104,11 +104,8 @@ class AirCMSService
 
         }
 
-        $resultMsg .= 'Отправьте боту @PmLobnyaBot в личном сообщении:'. PHP_EOL;
-        $resultMsg .= '/pm - среднее PM 2.5 за последние 5 минут'.PHP_EOL;
-        $resultMsg .= '/weather - общий мониторинг воздуха'.PHP_EOL;
-        $resultMsg .= '/info - полезная информация'.PHP_EOL;
-        $resultMsg .= '/help - список команд'. PHP_EOL;
+        $resultMsg .= file_get_contents('app/tpl/footer');
+
 //        $resultMsg .= PHP_EOL. PHP_EOL;
 //        $resultMsg .= 'https://aircms.online/' . PHP_EOL;
 

@@ -66,7 +66,8 @@ class InfoCommand extends SystemCommand
         // If you use deep-linking, get the parameter like this:
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
-            file_get_contents('app/tpl/info.md'),
+            file_get_contents('app/tpl/info') .
+            file_get_contents('app/tpl/footer'),
             [
                 'parse_mode' => 'markdown',
             ]
