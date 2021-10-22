@@ -27,10 +27,11 @@ class HookManagerAction extends Action
 
         $this->manager->sendSimpleMessage($msg);
         $this->manager->hook();
-
+//
 //        $data = (new SensorService())->getMessage();
 //        $data = (new AirCMSService())->getMessage();
 //        $data = (new SensorPm1Service())->getMessage();
+//        $data = (new SensorPm24Service())->getMessage();
 //        $this->manager->sendSimpleMessage($data);
 //        echo $data;
 
