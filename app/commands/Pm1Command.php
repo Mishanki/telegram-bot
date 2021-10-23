@@ -52,7 +52,7 @@ class Pm1Command extends SystemCommand
     /**
      * @var bool
      */
-    protected $private_only = false;
+    protected $private_only = true;
 
     /**
      * Main command execution
