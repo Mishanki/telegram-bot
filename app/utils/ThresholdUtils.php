@@ -10,7 +10,7 @@ class ThresholdUtils
      */
     public static function markdownPm25(float $val): string
     {
-        if ($val >= 25) {
+        if ($val >= 15) {
             $val = '*'.$val.'*';
         }
 
@@ -23,7 +23,7 @@ class ThresholdUtils
      */
     public static function markdownPm10(float $val): string
     {
-        if ($val >= 50) {
+        if ($val >= 45) {
             $val = '*'.$val.'*';
         }
 
