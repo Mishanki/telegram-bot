@@ -3,7 +3,6 @@
 namespace app\services;
 
 use app\commands\GenericCommand;
-use app\commands\HelpCommand;
 use app\commands\InfoCommand;
 use app\commands\Pm1Command;
 use app\commands\Pm24Command;
@@ -45,7 +44,6 @@ class ManagerService
             $telegram->addCommandClass(Pm24Command::class);
             $telegram->addCommandClass(WeaherCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
-            $telegram->addCommandClass(HelpCommand::class);
             $telegram->addCommandClass(InfoCommand::class);
 
             $telegram->enableLimiter([
