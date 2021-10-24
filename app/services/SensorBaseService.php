@@ -72,6 +72,9 @@ class SensorBaseService
         $result = [];
         foreach ($data as $item) {
             $id = $item['sensor']['id'] ?? null;
+            if (!$id) {
+                continue;
+            }
             $time = $item['timestamp'] ?? null;
             $pmVal = $item['sensordatavalues'][1]['value'] ?? null;
             if (in_array($id, $ids)) {

@@ -25,6 +25,12 @@ class SensorPmObject
         ],
         [
             'city' => 'Лобня',
+            'str' => 'ул. 40 лет Октября, 16',
+            'sid' => null,
+            'airCmsId' => 751,
+        ],
+        [
+            'city' => 'Лобня',
             'str' => 'Деповская ул., 15',
             'sid' => 66319,
             'airCmsId' => 749,
