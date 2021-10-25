@@ -68,16 +68,16 @@ class StartCommand extends SystemCommand
             file_get_contents('app/tpl/footer'),
             [
                 'parse_mode' => 'markdown',
-                'reply_markup' => json_encode([
-                    'inline_keyboard' => [
-                        [
-                            ['text' => 'pm', 'callback_data' => '/pm'],
-                            ['text' => 'pm1', 'callback_data' => '/pm1'],
-                            ['text' => 'pm24', 'callback_data' => '/pm24'],
-                            ['text' => 'weather', 'callback_data' => '/weather'],
-                        ]
-                    ]
-                ])
+//                'reply_markup' => json_encode([
+//                    'inline_keyboard' => [
+//                        [
+//                            ['text' => 'pm', 'url' => '/pm'],
+//                            ['text' => 'pm1', 'url' => '/pm1'],
+//                            ['text' => 'pm24', 'url' => '/pm24'],
+//                            ['text' => 'weather', 'url' => '/weather'],
+//                        ]
+//                    ]
+//                ])
             ]
         );
     }
