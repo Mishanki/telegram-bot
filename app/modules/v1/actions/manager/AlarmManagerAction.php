@@ -23,9 +23,14 @@ class AlarmManagerAction extends Action
 
     public function run(): bool
     {
-        if($msg = $this->alarm->getAlarmMessage()) {
-            $this->manager->sendSimpleMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
-            return true;
+        try {
+            if ($msg = $this->alarm->getAlarmMessage()) {
+                $this->manager->sendSimpleMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
+
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
         }
 
         return false;
