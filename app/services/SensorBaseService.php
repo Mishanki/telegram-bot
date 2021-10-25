@@ -124,11 +124,12 @@ class SensorBaseService
                 continue;
             }
             $tmp = '';
+
             foreach ($items as $time => $item) {
 
-                if (empty($tmp) || !empty($tmp) && $tmp != $item['city'] . $item['str']) {
-                    $tmp = $item['city'] . $item['str'];
-                    $result .= '*'.$item['city'] . ', ' . $item['str'].'*' ;
+                if (empty($tmp) || !empty($tmp) && $tmp != $item['str']) {
+                    $tmp = $item['str'];
+                    $result .= '*'. $item['str'].'*' ;
                 }
 
                 $dateObj = new \DateTime($time.'UTC');
