@@ -22,6 +22,7 @@
 
 namespace app\commands;
 
+use app\helper\KeyboardHelper;
 use app\services\SensorPm1Service;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
@@ -69,6 +70,7 @@ class Pm1Command extends SystemCommand
             $service->getMessage(),
             [
                 'parse_mode' => 'markdown',
+                'reply_markup' => KeyboardHelper::getKeyboard(),
             ]
         );
     }

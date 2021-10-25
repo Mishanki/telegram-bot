@@ -22,6 +22,7 @@
 
 namespace app\commands;
 
+use app\helper\KeyboardHelper;
 use app\services\AirCMSService;
 use app\services\SensorService;
 use Longman\TelegramBot\Commands\SystemCommand;
@@ -70,6 +71,7 @@ class InfoCommand extends SystemCommand
             file_get_contents('app/tpl/footer'),
             [
                 'parse_mode' => 'markdown',
+                'reply_markup' => KeyboardHelper::getKeyboard(),
             ]
         );
     }

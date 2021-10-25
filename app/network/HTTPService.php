@@ -2,6 +2,8 @@
 
 namespace app\network;
 
+use Longman\TelegramBot\Entities\Keyboard;
+
 class HTTPService
 {
     /**
@@ -11,10 +13,43 @@ class HTTPService
     public function sendMessage(string $msg)
     {
         return file_get_contents($this->getBotWithToken().'?'.http_build_query([
-                'chat_id' => getenv('TELEGRAM_CHAT_ID'),
-                'text' => $msg,
-                'parse_mode' => 'markdown',
-            ]));
+            'chat_id' => getenv('TELEGRAM_CHAT_ID'),
+            'text' => $msg,
+            'parse_mode' => 'markdown',
+        ]));
+
+
+    }
+
+    private function getInlineKeyboard(): string
+    {
+        return json_encode([
+            'inline_keyboard' => [
+                [
+                    ['text' => 'pm', 'callback_data' => 'pm'],
+                    ['text' => 'pm1', 'callback_data' => 'pm1'],
+                    ['text' => 'pm24', 'callback_data' => 'pm24'],
+                    ['text' => 'weather', 'callback_data' => 'weather'],
+                ]
+            ]
+        ]);
+    }
+
+    private function getReplyKeyboard(): string
+    {
+        return json_encode([
+            "keyboard" => [
+                [
+                    ["text" => "/pm"],
+                    ["text" => "/pm1"],
+                    ["text" => "/pm24"],
+                    ["text" => "/weather"],
+                    ["text" => "/info"],
+                ]
+            ],
+            "one_time_keyboard" => false,
+            "resize_keyboard" => true
+        ]);
     }
 
     /**

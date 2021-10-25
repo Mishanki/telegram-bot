@@ -22,8 +22,10 @@
 
 namespace app\commands;
 
+use app\helper\KeyboardHelper;
 use app\services\SensorPm24Service;
 use Longman\TelegramBot\Commands\SystemCommand;
+use Longman\TelegramBot\Entities\Keyboard;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 
@@ -69,6 +71,7 @@ class Pm24Command extends SystemCommand
             $service->getMessage(),
             [
                 'parse_mode' => 'markdown',
+                'reply_markup' => KeyboardHelper::getKeyboard(),
             ]
         );
     }

@@ -22,6 +22,7 @@
 
 namespace app\commands;
 
+use app\helper\KeyboardHelper;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
@@ -68,16 +69,7 @@ class StartCommand extends SystemCommand
             file_get_contents('app/tpl/footer'),
             [
                 'parse_mode' => 'markdown',
-//                'reply_markup' => json_encode([
-//                    'inline_keyboard' => [
-//                        [
-//                            ['text' => 'pm', 'url' => '/pm'],
-//                            ['text' => 'pm1', 'url' => '/pm1'],
-//                            ['text' => 'pm24', 'url' => '/pm24'],
-//                            ['text' => 'weather', 'url' => '/weather'],
-//                        ]
-//                    ]
-//                ])
+                'reply_markup' => KeyboardHelper::getKeyboard(),
             ]
         );
     }
