@@ -32,6 +32,16 @@ class ManagerService
         return $this->http->sendMessage($msg);
     }
 
+    /**
+     * @param string $msg
+     * @param string $chat_id
+     * @return false|string
+     */
+    public function sendSimpleMessageByChatId(string $msg = 'test', string $chat_id)
+    {
+        return $this->http->sendMessageChatId($msg, $chat_id);
+    }
+
     public function hook()
     {
         try {

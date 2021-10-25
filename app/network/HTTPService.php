@@ -18,6 +18,20 @@ class HTTPService
     }
 
     /**
+     * @param string $msg
+     * @param string $chatId
+     * @return false|string
+     */
+    public function sendMessageChatId(string $msg, string $chatId)
+    {
+        return file_get_contents($this->getBotWithToken().'?'.http_build_query([
+                'chat_id' => $chatId,
+                'text' => $msg,
+                'parse_mode' => 'markdown',
+            ]));
+    }
+
+    /**
      * @return string
      */
     private function getBotWithToken(): string

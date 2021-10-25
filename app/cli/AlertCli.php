@@ -15,7 +15,7 @@ class AlertCli
             $manager = new ManagerService();
 
             if($msg = $service->getAlarmMessage()) {
-                $manager->sendSimpleMessage($msg);
+                $manager->sendSimpleMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
                 echo '+';
             } else {
                 echo '.';
