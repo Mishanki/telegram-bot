@@ -139,7 +139,7 @@ class SensorBaseService
             $result .= PHP_EOL;
         }
 
-        $result .= file_get_contents('app/tpl/footer');
+//        $result .= file_get_contents('app/tpl/footer');
 
         return $result;
     }
