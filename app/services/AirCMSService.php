@@ -72,7 +72,7 @@ class AirCMSService
 
         }
 
-//        $resultMsg .= file_get_contents('app/tpl/footer');
+        $resultMsg .= file_get_contents('app/tpl/menu');
 
         return $resultMsg;
     }

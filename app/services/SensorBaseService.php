@@ -124,22 +124,21 @@ class SensorBaseService
                 continue;
             }
             $tmp = '';
-
             foreach ($items as $time => $item) {
 
-                if (empty($tmp) || !empty($tmp) && $tmp != $item['str']) {
-                    $tmp = $item['str'];
-                    $result .= '*'. $item['str'].'*' ;
+                if (empty($tmp) || !empty($tmp) && $tmp != $item['city'] . $item['str']) {
+                    $tmp = $item['city'] . $item['str'];
+                    $result .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
                 }
 
                 $dateObj = new \DateTime($time.'UTC');
                 $dateObj->setTimezone(new DateTimeZone('Europe/Moscow'));
-                $result .=  '  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . MeasurementDictionary::MEASUREMENT_PM_RU . PHP_EOL;
+                $result .=  'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . MeasurementDictionary::MEASUREMENT_PM_RU . PHP_EOL;
             }
             $result .= PHP_EOL;
         }
 
-//        $result .= file_get_contents('app/tpl/footer');
+        $result .= file_get_contents('app/tpl/menu');
 
         return $result;
     }
