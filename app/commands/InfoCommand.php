@@ -68,7 +68,7 @@ class InfoCommand extends SystemCommand
         // $deep_linking_parameter = $this->getMessage()->getText(true);
         return $this->replyToChat(
             file_get_contents('app/tpl/info') .
-            file_get_contents('app/tpl/footer'),
+            file_get_contents('app/tpl/menu'),
             [
                 'parse_mode' => 'markdown',
                 'reply_markup' => KeyboardHelper::getKeyboard(),
