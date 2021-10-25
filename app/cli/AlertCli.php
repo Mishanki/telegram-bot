@@ -28,7 +28,7 @@ class AlertCli
                 echo '.';
             }
 
-            sleep(180);
+            sleep(300);
         }
     }
 }
