@@ -128,12 +128,12 @@ class SensorBaseService
 
                 if (empty($tmp) || !empty($tmp) && $tmp != $item['city'] . $item['str']) {
                     $tmp = $item['city'] . $item['str'];
-                    $result .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
+                    $result .= '*'.$item['city'] . ', ' . $item['str'].'*' ;
                 }
 
                 $dateObj = new \DateTime($time.'UTC');
                 $dateObj->setTimezone(new DateTimeZone('Europe/Moscow'));
-                $result .=  'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . MeasurementDictionary::MEASUREMENT_PM_RU . PHP_EOL;
+                $result .=  '  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . MeasurementDictionary::MEASUREMENT_PM_RU . PHP_EOL;
             }
             $result .= PHP_EOL;
         }
