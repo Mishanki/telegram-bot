@@ -21,12 +21,13 @@ class AlarmManagerAction extends Action
         $this->manager = new ManagerService();
     }
 
-    public function run(): string
+    public function run(): bool
     {
-        $msg = $this->alarm->getAlarmMessage();
+        if($msg = $this->alarm->getAlarmMessage()) {
+            $this->manager->sendSimpleMessage($msg);
+            return true;
+        }
 
-        $this->manager->sendSimpleMessage($msg);
-
-        return '';
+        return false;
     }
 }
