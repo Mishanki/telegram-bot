@@ -2,15 +2,22 @@
 
 namespace app\utils;
 
+use app\models\dictionary\ThresholdDictionary;
+
 class ThresholdUtils
 {
+    public static function isPm25Alarm24(float $val): bool
+    {
+        return $val >= ThresholdDictionary::PM_25_UPPER_THRESHOLD_24;
+    }
+
     /**
      * @param float $val
      * @return string
      */
     public static function markdownPm25(float $val): string
     {
-        if ($val >= 15) {
+        if (ThresholdUtils::isPm25Alarm24($val)) {
             $val = '*'.$val.'*';
         }
 
@@ -23,7 +30,7 @@ class ThresholdUtils
      */
     public static function markdownPm10(float $val): string
     {
-        if ($val >= 45) {
+        if ($val >= ThresholdDictionary::PM_10_UPPER_THRESHOLD_24) {
             $val = '*'.$val.'*';
         }
 

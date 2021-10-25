@@ -120,7 +120,7 @@ class AirCMSService
      * @return array
      * @throws \Exception
      */
-    private function getData(): array
+    public function getData(): array
     {
         if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0')) {
             throw new \Exception('Json is empty');

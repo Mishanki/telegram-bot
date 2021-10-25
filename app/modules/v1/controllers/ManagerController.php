@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\actions\manager\AlarmManagerAction;
 use app\modules\v1\actions\manager\HookManagerAction;
 use app\modules\v1\core\ApiController;
 
@@ -11,7 +12,10 @@ class ManagerController extends ApiController
     {
         return [
             'hook' => [
-                'class' => HookManagerAction::class
+                'class' => HookManagerAction::class,
+            ],
+            'alarm' => [
+                'class' => AlarmManagerAction::class,
             ]
         ];
     }
