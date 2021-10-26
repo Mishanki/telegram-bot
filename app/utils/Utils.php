@@ -30,7 +30,7 @@ class Utils
      */
     public static function markdownPm10(float $val): string
     {
-        if ($val >= ThresholdDictionary::PM_10_UPPER_THRESHOLD_24) {
+        if ($val >= ThresholdDictionary::VOZ_PM_10_UPPER_THRESHOLD_24) {
             $val = '*'.$val.'*';
         }
 
