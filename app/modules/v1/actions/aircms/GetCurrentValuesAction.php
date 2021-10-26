@@ -4,6 +4,7 @@ namespace app\modules\v1\actions\aircms;
 
 use app\modules\v1\core\Action;
 use app\services\AirCMSService;
+use Exception;
 
 class GetCurrentValuesAction extends Action
 {
@@ -17,7 +18,7 @@ class GetCurrentValuesAction extends Action
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function run(): string
     {

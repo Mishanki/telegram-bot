@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use app\models\dictionary\MeasurementDictionary;
 use app\services\objects\SensorPmObject;
 use app\utils\ThresholdUtils;
 
@@ -51,7 +52,7 @@ class AirCMSService
 
         ksort($msg);
 
-        $type = 'мкг/ куб. м.';
+        $type = MeasurementDictionary::MEASUREMENT_PM_RU;
         $resultMsg = 'Общий мониторинг воздуха' . PHP_EOL . PHP_EOL;
         $tmpCity = null;
         foreach ($msg as $item) {
