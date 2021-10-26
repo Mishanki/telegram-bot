@@ -8,7 +8,7 @@ class Utils
 {
     public static function isPm25Alarm24(float $val): bool
     {
-        return $val >= ThresholdDictionary::VOZ_PM_25_UPPER_THRESHOLD_24;
+        return $val >= ThresholdDictionary::PM_25_UPPER_THRESHOLD_24;
     }
 
     /**
@@ -30,7 +30,7 @@ class Utils
      */
     public static function markdownPm10(float $val): string
     {
-        if ($val >= ThresholdDictionary::VOZ_PM_10_UPPER_THRESHOLD_24) {
+        if ($val >= ThresholdDictionary::PM_10_UPPER_THRESHOLD_24) {
             $val = '*'.$val.'*';
         }
 
