@@ -5,23 +5,13 @@ namespace app\services;
 use app\models\dictionary\MeasurementDictionary;
 use app\services\objects\SensorPmObject;
 use app\utils\ThresholdUtils;
+use Exception;
 
 class AirCMSService
 {
-    public function getDevices()
-    {
-        $data = file_get_contents(getenv('AIRCMS_API_HOST').'?devices');
-
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
-
-        return [];
-    }
-
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function getMessage(): string
     {
@@ -119,19 +109,19 @@ class AirCMSService
 
     /**
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getData(): array
     {
         if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0')) {
-            throw new \Exception('Json is empty');
+            throw new Exception('Json is empty');
         }
 
         $ids = $this->getIds();
         $data = json_decode($json, true);
 
         if (empty($data['data'])) {
-            throw new \Exception('Data is not found');
+            throw new Exception('Data is not found');
         }
 
         foreach ($data['data'] ?? [] as $item) {
