@@ -8,7 +8,7 @@ class Utils
 {
     public static function isPm25Alarm24(float $val): bool
     {
-        return $val >= ThresholdDictionary::PM_25_UPPER_THRESHOLD_24;
+        return $val >= ThresholdDictionary::VOZ_PM_25_UPPER_THRESHOLD_24;
     }
 
     /**
