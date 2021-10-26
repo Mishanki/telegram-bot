@@ -4,7 +4,7 @@ namespace app\services;
 
 use app\models\dictionary\MeasurementDictionary;
 use app\services\objects\SensorPmObject;
-use app\utils\ThresholdUtils;
+use app\utils\Utils;
 use Exception;
 
 class AirCMSService
@@ -52,12 +52,12 @@ class AirCMSService
                 $resultMsg .= '*'.$item['city'] . ', ' . $item['str'].'*' . PHP_EOL;
             }
 
-            $resultMsg .= 'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['sds_p2']) . ' ' . $type . PHP_EOL;
-            $resultMsg .= 'PM 10   -  ' . ThresholdUtils::markdownPm10($item['sds_p1']) . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 2.5  -  ' . Utils::markdownPm25($item['sds_p2']) . ' ' . $type . PHP_EOL;
+            $resultMsg .= 'PM 10   -  ' . Utils::markdownPm10($item['sds_p1']) . ' ' . $type . PHP_EOL;
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
             $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . ' %' . PHP_EOL;
             $resultMsg .= 'Давл-е  -  ' . $item['pressure'] . ' мм рт. ст.'. PHP_EOL;
-            $resultMsg .= 'Ветер ('.ThresholdUtils::windPowerBeaufort($item['wind_speed']).')  -  ' . $this->windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
+            $resultMsg .= 'Ветер ('.Utils::windPowerBeaufort($item['wind_speed']).')  -  ' . Utils::windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
 
             $resultMsg .=  PHP_EOL;
 
@@ -68,44 +68,7 @@ class AirCMSService
         return $resultMsg;
     }
 
-    /**
-     * @param string $direction
-     * @return string
-     */
-    private function windDirectionTranslate(string $direction): string
-    {
-        switch ($direction)
-        {
-            case 'n':
-                $direction = 'с';
-                break;
-            case 'e':
-                $direction = 'в';
-                break;
-            case 's':
-                $direction = 'ю';
-                break;
-            case 'w':
-                $direction = 'з';
-                break;
-            case 'sw':
-                $direction = 'юз';
-                break;
-            case 'se':
-                $direction = 'юв';
-                break;
-            case 'nw':
-                $direction = 'сз';
-                break;
-            case 'ne':
-                $direction = 'св';
-                break;
-            default:
-                break;
-        }
 
-        return mb_strtoupper($direction);
-    }
 
     /**
      * @return array

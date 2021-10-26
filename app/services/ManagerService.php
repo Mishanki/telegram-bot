@@ -27,7 +27,7 @@ class ManagerService
      * @param string $msg
      * @return false|string
      */
-    public function sendSimpleMessage(string $msg = "test")
+    public function sendSimpleMessage(string $msg)
     {
         return $this->http->sendMessage($msg);
     }
@@ -37,7 +37,7 @@ class ManagerService
      * @param string $chat_id
      * @return false|string
      */
-    public function sendSimpleMessageByChatId(string $msg = 'test', string $chat_id)
+    public function sendSimpleMessageByChatId(string $msg, string $chat_id)
     {
         return $this->http->sendMessageChatId($msg, $chat_id);
     }

@@ -40,5 +40,4 @@ class HTTPService
     {
         return str_replace('<token>', getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_BOT_URL'));
     }
-
 }

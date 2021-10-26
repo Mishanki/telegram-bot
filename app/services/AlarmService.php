@@ -4,7 +4,7 @@ namespace app\services;
 
 use app\models\dictionary\MeasurementDictionary as MD;
 use app\services\objects\SensorPmObject;
-use app\utils\ThresholdUtils;
+use app\utils\Utils;
 
 class AlarmService
 {
@@ -58,7 +58,7 @@ class AlarmService
      */
     private function isAlarmItem(array $item): bool
     {
-        if (ThresholdUtils::isPm25Alarm24($item['sds_p2'])) {
+        if (Utils::isPm25Alarm24($item['sds_p2'])) {
             return true;
         }
 

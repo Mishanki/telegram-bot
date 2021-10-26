@@ -4,7 +4,7 @@ namespace app\utils;
 
 use app\models\dictionary\ThresholdDictionary;
 
-class ThresholdUtils
+class Utils
 {
     public static function isPm25Alarm24(float $val): bool
     {
@@ -17,7 +17,7 @@ class ThresholdUtils
      */
     public static function markdownPm25(float $val): string
     {
-        if (ThresholdUtils::isPm25Alarm24($val)) {
+        if (Utils::isPm25Alarm24($val)) {
             $val = '*'.$val.'*';
         }
 
@@ -88,4 +88,42 @@ class ThresholdUtils
         return $name;
     }
 
+    /**
+     * @param string $direction
+     * @return string
+     */
+    public static function windDirectionTranslate(string $direction): string
+    {
+        switch ($direction)
+        {
+            case 'n':
+                $direction = 'с';
+                break;
+            case 'e':
+                $direction = 'в';
+                break;
+            case 's':
+                $direction = 'ю';
+                break;
+            case 'w':
+                $direction = 'з';
+                break;
+            case 'sw':
+                $direction = 'юз';
+                break;
+            case 'se':
+                $direction = 'юв';
+                break;
+            case 'nw':
+                $direction = 'сз';
+                break;
+            case 'ne':
+                $direction = 'св';
+                break;
+            default:
+                break;
+        }
+
+        return mb_strtoupper($direction);
+    }
 }

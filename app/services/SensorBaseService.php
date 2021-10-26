@@ -4,7 +4,7 @@ namespace app\services;
 
 use app\models\dictionary\MeasurementDictionary;
 use app\services\objects\SensorPmObject;
-use app\utils\ThresholdUtils;
+use app\utils\Utils;
 use DateTimeZone;
 use Exception;
 
@@ -78,9 +78,6 @@ class SensorBaseService
             $time = $item['timestamp'] ?? null;
             $pmVal = $item['sensordatavalues'][1]['value'] ?? null;
             if (in_array($id, $ids)) {
-                if (!empty($result[$id])) {
-//                    continue;
-                }
                 $result['data'][$id][$time] = $pmVal;
             }
         }
@@ -109,7 +106,6 @@ class SensorBaseService
                             'str' => $sensor['str'],
                             'value' => $v,
                         ];
-//                        break 2;
                     }
                 }
             }
@@ -133,7 +129,7 @@ class SensorBaseService
 
                 $dateObj = new \DateTime($time.'UTC');
                 $dateObj->setTimezone(new DateTimeZone('Europe/Moscow'));
-                $result .=  'PM 2.5  -  ' . ThresholdUtils::markdownPm25($item['value']) . ' ' . MeasurementDictionary::MEASUREMENT_PM_RU . PHP_EOL;
+                $result .=  'PM 2.5  -  ' . Utils::markdownPm25($item['value']) . ' ' . MeasurementDictionary::MEASUREMENT_PM_RU . PHP_EOL;
             }
             $result .= PHP_EOL;
         }

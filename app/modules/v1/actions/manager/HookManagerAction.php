@@ -3,11 +3,7 @@
 namespace app\modules\v1\actions\manager;
 
 use app\modules\v1\core\Action;
-use app\services\AirCMSService;
 use app\services\ManagerService;
-use app\services\SensorPm1Service;
-use app\services\SensorService;
-use app\services\SensorPm24Service;
 
 class HookManagerAction extends Action
 {
@@ -19,22 +15,10 @@ class HookManagerAction extends Action
         $this->manager = new ManagerService();
     }
 
-    public function run(): string
+    public function run(): bool
     {
-        $msg = file_get_contents('php://input');
-        $msg = json_decode($msg, true);
-        $msg = json_encode($msg, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
-
-        $this->manager->sendSimpleMessage($msg);
         $this->manager->hook();
-//
-//        $data = (new SensorService())->getMessage();
-//        $data = (new AirCMSService())->getMessage();
-//        $data = (new SensorPm1Service())->getMessage();
-//        $data = (new SensorPm24Service())->getMessage();
-//        $this->manager->sendSimpleMessage($data);
-//        echo $data;
 
-        return '';
+        return true;
     }
 }
