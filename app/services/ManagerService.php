@@ -8,7 +8,7 @@ use app\commands\Pm1Command;
 use app\commands\Pm24Command;
 use app\commands\PmCommand;
 use app\commands\StartCommand;
-use app\commands\WeaherCommand;
+use app\commands\WeatherCommand;
 use app\network\HTTPService;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
@@ -52,7 +52,7 @@ class ManagerService
             $telegram->addCommandClass(PmCommand::class);
             $telegram->addCommandClass(Pm1Command::class);
             $telegram->addCommandClass(Pm24Command::class);
-            $telegram->addCommandClass(WeaherCommand::class);
+            $telegram->addCommandClass(WeatherCommand::class);
             $telegram->addCommandClass(GenericCommand::class);
             $telegram->addCommandClass(InfoCommand::class);
 

@@ -24,12 +24,11 @@ namespace app\commands;
 
 use app\helper\KeyboardHelper;
 use app\services\AirCMSService;
-use app\services\SensorService;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 
-class WeaherCommand extends SystemCommand
+class WeatherCommand extends SystemCommand
 {
     /**
      * @var string
