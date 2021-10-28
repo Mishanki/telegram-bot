@@ -17,8 +17,8 @@ class AlertCli
             try {
                 $msg = $service->getAlarmMessage();
             } catch (\Throwable $e) {
-                echo PHP_EOL . $e->getMessage() . PHP_EOL;
-                continue;
+                $msg = null;
+                echo PHP_EOL . '['. date('Y-m-d H:i:s') . '] ' . $e->getMessage() . PHP_EOL;
             }
 
             if($msg) {
