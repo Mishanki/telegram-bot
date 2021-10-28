@@ -76,7 +76,14 @@ class AirCMSService
      */
     public function getData(): array
     {
-        if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0')) {
+        $arrContextOptions = [
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ],
+        ];
+
+        if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0', false, stream_context_create($arrContextOptions))) {
             throw new Exception('Json is empty');
         }
 
