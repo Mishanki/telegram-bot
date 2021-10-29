@@ -10,6 +10,10 @@ use app\services\AirCMSService;
 use app\services\AlarmService;
 use app\services\HookService;
 use app\services\ManagerService;
+use app\services\SensorBaseService;
+use app\services\SensorPm1Service;
+use app\services\SensorPm24Service;
+use app\services\SensorService;
 
 class Container
 {
@@ -25,6 +29,10 @@ class Container
         // services
         $container->add(AlarmService::class);
         $container->add(HookService::class);
+        $container->add(SensorService::class)->addArgument(MainHTTPServiceInterface::class);
+        $container->add(SensorPm1Service::class)->addArgument(MainHTTPServiceInterface::class);
+        $container->add(SensorPm24Service::class)->addArgument(MainHTTPServiceInterface::class);
+        $container->add(SensorBaseService::class);
         $container->add(AirCMSService::class)->addArgument(MainHTTPServiceInterface::class);
         $container->add(ManagerService::class)->addArgument(MainHTTPServiceInterface::class);
 
