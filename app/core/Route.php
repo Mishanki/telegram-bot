@@ -125,6 +125,8 @@ class Route
         if (file_exists('./.env')) {
             (Dotenv::createUnsafeImmutable('./'))->load();
         }
+
+        Container::init();
     }
 
     private static function getArguments(): array

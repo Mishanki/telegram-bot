@@ -3,12 +3,25 @@
 namespace app\services;
 
 use app\models\dictionary\MeasurementDictionary;
+use app\network\MainHTTPServiceInterface;
 use app\services\objects\SensorPmObject;
 use app\utils\Utils;
 use Exception;
 
 class AirCMSService
 {
+    /* @var $httpService MainHTTPServiceInterface */
+    public $httpService;
+
+    /**
+     * AirCMSService constructor.
+     * @param MainHTTPServiceInterface $httpService
+     */
+    public function __construct(MainHTTPServiceInterface $httpService)
+    {
+        $this->httpService = $httpService;
+    }
+
     /**
      * @return string
      * @throws Exception
@@ -76,14 +89,7 @@ class AirCMSService
      */
     public function getData(): array
     {
-        $arrContextOptions = [
-            "ssl" => [
-                "verify_peer" => false,
-                "verify_peer_name" => false,
-            ],
-        ];
-
-        if(!$json = file_get_contents(getenv('AIRCMS_API_HOST').'?T=0', false, stream_context_create($arrContextOptions))) {
+        if(!$json = $this->httpService->request(getenv('AIRCMS_API_HOST').'?T=0')) {
             throw new Exception('Json is empty');
         }
 

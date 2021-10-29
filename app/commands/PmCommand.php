@@ -22,6 +22,7 @@
 
 namespace app\commands;
 
+use app\core\Bot;
 use app\helper\KeyboardHelper;
 use app\services\SensorService;
 use Longman\TelegramBot\Commands\SystemCommand;
@@ -63,9 +64,9 @@ class PmCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        $service = new SensorService();
-        // If you use deep-linking, get the parameter like this:
-        // $deep_linking_parameter = $this->getMessage()->getText(true);
+        /* @var $service SensorService */
+        $service = Bot::$container->get(SensorService::class);
+
         return $this->replyToChat(
             $service->getMessage(),
             [

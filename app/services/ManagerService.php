@@ -9,18 +9,18 @@ use app\commands\Pm24Command;
 use app\commands\PmCommand;
 use app\commands\StartCommand;
 use app\commands\WeatherCommand;
-use app\network\HTTPService;
+use app\network\MainHTTPServiceInterface;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 
 class ManagerService
 {
-    /* @var $http HTTPService */
-    public $http;
+    /* @var $httpService MainHTTPServiceInterface */
+    public $httpService;
 
-    public function __construct()
+    public function __construct(MainHTTPServiceInterface $httpService)
     {
-        $this->http = new HTTPService();
+        $this->httpService = $httpService;
     }
 
     /**
@@ -29,7 +29,7 @@ class ManagerService
      */
     public function sendSimpleMessage(string $msg)
     {
-        return $this->http->sendMessage($msg);
+        return $this->httpService->sendMessageToChat($msg);
     }
 
     /**
@@ -39,7 +39,7 @@ class ManagerService
      */
     public function sendSimpleMessageByChatId(string $msg, string $chat_id)
     {
-        return $this->http->sendMessageChatId($msg, $chat_id);
+        return $this->httpService->sendMessageToChat($msg, $chat_id);
     }
 
     public function hook()

@@ -3,6 +3,7 @@
 namespace app\services;
 
 use app\models\dictionary\MeasurementDictionary;
+use app\network\MainHTTPServiceInterface;
 use app\services\objects\SensorPmObject;
 use app\utils\Utils;
 use DateTimeZone;
@@ -10,6 +11,18 @@ use Exception;
 
 class SensorBaseService
 {
+    /* @var $httpService MainHTTPServiceInterface */
+    public $httpService;
+
+    /**
+     * AirCMSService constructor.
+     * @param MainHTTPServiceInterface $httpService
+     */
+    public function __construct(MainHTTPServiceInterface $httpService)
+    {
+        $this->httpService = $httpService;
+    }
+
     /**
      * @param string $host
      * @return string
@@ -63,7 +76,7 @@ class SensorBaseService
      */
     public function getData(string $host): array
     {
-        if(!$json = file_get_contents($host)) {
+        if(!$json = $this->httpService->request($host)) {
             throw new Exception('Json is empty');
         }
 

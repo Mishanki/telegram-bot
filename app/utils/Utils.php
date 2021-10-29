@@ -6,6 +6,10 @@ use app\models\dictionary\ThresholdDictionary;
 
 class Utils
 {
+    /**
+     * @param float $val
+     * @return bool
+     */
     public static function isPm25Alarm24(float $val): bool
     {
         return $val >= ThresholdDictionary::PM_25_UPPER_THRESHOLD_24;

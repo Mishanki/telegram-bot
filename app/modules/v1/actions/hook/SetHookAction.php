@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\actions\hook;
 
+use app\core\Bot;
 use app\modules\v1\core\Action;
 use app\services\HookService;
 
@@ -12,7 +13,7 @@ class SetHookAction extends Action
 
     public function init()
     {
-        $this->service = new HookService();
+        $this->service = Bot::$container->get(HookService::class);
     }
 
     /**

@@ -8,25 +8,13 @@ use app\utils\Utils;
 
 class AlarmService
 {
-    /* @var $airCMSService AirCMSService */
-    public $airCMSService;
-
     /**
-     * AlarmService constructor.
-     * @param AirCMSService $airCMSService
-     */
-    public function __construct(AirCMSService $airCMSService)
-    {
-        $this->airCMSService = $airCMSService;
-    }
-
-    /**
+     * @param array $data
      * @return null|string
-     * @throws \Exception
      */
-    public function getAlarmMessage(): ?string
+    public function getAlarmMessage(array $data): ?string
     {
-        $data = $this->getData();
+        $data = $this->getData($data);
         foreach ($data as $num => $item) {
             if (!$this->isAlarmItem($item)) {
                 unset($data[$num]);
@@ -65,8 +53,12 @@ class AlarmService
         return false;
     }
 
-    private function getData() {
-        $data = $this->airCMSService->getData();
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function getData(array $data): array
+    {
         foreach ($data as $senId => $item) {
             foreach ((new SensorPmObject())->getSensors() as $num => $sensor) {
                 if ($sensor['airCmsId'] == $senId) {

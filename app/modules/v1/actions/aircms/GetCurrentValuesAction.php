@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\actions\aircms;
 
+use app\core\Bot;
 use app\modules\v1\core\Action;
 use app\services\AirCMSService;
 use Exception;
@@ -13,7 +14,7 @@ class GetCurrentValuesAction extends Action
 
     public function init()
     {
-        $this->service = new AirCMSService();
+        $this->service = Bot::$container->get(AirCMSService::class);
     }
 
     /**

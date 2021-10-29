@@ -22,7 +22,9 @@
 
 namespace app\commands;
 
+use app\core\Bot;
 use app\helper\KeyboardHelper;
+use app\network\HTTPService;
 use app\services\AirCMSService;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
@@ -63,9 +65,9 @@ class WeatherCommand extends SystemCommand
      */
     public function execute(): ServerResponse
     {
-        $service = new AirCMSService();
-        // If you use deep-linking, get the parameter like this:
-        // $deep_linking_parameter = $this->getMessage()->getText(true);
+        /* @var $service AirCMSService */
+        $service = Bot::$container->get(AirCMSService::class);
+
         return $this->replyToChat(
             $service->getMessage(),
             [

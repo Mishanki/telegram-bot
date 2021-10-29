@@ -2,6 +2,7 @@
 
 namespace app\cli;
 
+use app\core\Container;
 use Dotenv\Dotenv;
 use Exception;
 
@@ -12,6 +13,8 @@ date_default_timezone_set('Europe/Moscow');
 if (file_exists('./.env')) {
     (Dotenv::createUnsafeImmutable('./'))->load();
 }
+
+Container::init();
 
 if (count($argv) !== 3) {
     throw new Exception('Cli error');

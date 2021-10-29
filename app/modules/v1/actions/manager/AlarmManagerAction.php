@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\actions\manager;
 
+use app\core\Bot;
 use app\modules\v1\core\Action;
 use app\services\AirCMSService;
 use app\services\AlarmService;
@@ -9,30 +10,33 @@ use app\services\ManagerService;
 
 class AlarmManagerAction extends Action
 {
-    /* @var $alarm AlarmService */
-    public $alarm;
+    /* @var $alarmService AlarmService */
+    public $alarmService;
 
-    /* @var $manager ManagerService */
-    public $manager;
+    /* @var $manageService ManagerService */
+    public $manageService;
 
-    public function init()
+    /* @var $airCmsService AirCMSService */
+    public $airCmsService;
+
+    public function init(): void
     {
-        $this->alarm = new AlarmService(new AirCMSService());
-        $this->manager = new ManagerService();
+        $this->alarmService = Bot::$container->get(AlarmService::class);
+        $this->manageService = Bot::$container->get(ManagerService::class);
+        $this->airCmsService = Bot::$container->get(AirCMSService::class);
     }
 
     public function run(): bool
     {
         try {
-            if ($msg = $this->alarm->getAlarmMessage()) {
-                $this->manager->sendSimpleMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
-
-                return true;
+            if($msg = $this->alarmService->getAlarmMessage($this->airCmsService->getData())) {
+                $this->manageService->sendSimpleMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
+                echo '+';
             }
-        } catch (\Exception $e) {
-            return false;
+        } catch (\Throwable $e) {
+            echo PHP_EOL . '['. date('Y-m-d H:i:s') . '] ' . $e->getMessage() . PHP_EOL;
         }
 
-        return false;
+        return true;
     }
 }
