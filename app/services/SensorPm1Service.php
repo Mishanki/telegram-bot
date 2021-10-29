@@ -10,7 +10,7 @@ class SensorPm1Service extends SensorBaseService
     private $cacheFile = './cache1.json';
     /* @var $cacheExp int */
     private $cacheExp = 45;
-    /* @var $header $string */
+    /* @var $header string */
     private $header = 'Средняя концентрация взвешенных частиц PM 2.5 '.MD::MEASUREMENT_PM_RU.' за последний час';
     /**
      * @return string

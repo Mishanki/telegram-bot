@@ -9,43 +9,14 @@ use app\commands\Pm24Command;
 use app\commands\PmCommand;
 use app\commands\StartCommand;
 use app\commands\WeatherCommand;
-use app\network\MainHTTPServiceInterface;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 
 class ManagerService
 {
-    /* @var $httpService MainHTTPServiceInterface */
-    public $httpService;
-
-    public function __construct(MainHTTPServiceInterface $httpService)
-    {
-        $this->httpService = $httpService;
-    }
-
-    /**
-     * @param string $msg
-     * @return false|string
-     */
-    public function sendSimpleMessage(string $msg)
-    {
-        return $this->httpService->sendMessageToChat($msg);
-    }
-
-    /**
-     * @param string $msg
-     * @param string $chat_id
-     * @return false|string
-     */
-    public function sendSimpleMessageByChatId(string $msg, string $chat_id)
-    {
-        return $this->httpService->sendMessageToChat($msg, $chat_id);
-    }
-
     public function hook()
     {
         try {
-            // Create Telegram API object
             $telegram = new Telegram(getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_USER_NAME'));
 
             $telegram->addCommandClass(StartCommand::class);
@@ -60,11 +31,8 @@ class ManagerService
                 'enabled' => true,
             ]);
 
-            // Handle telegram webhook request
             $telegram->handle();
         } catch (TelegramException $e) {
-            // Silence is golden!
-            // log telegram errors
              echo $e->getMessage();
         }
     }

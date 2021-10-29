@@ -6,15 +6,15 @@ use app\core\Bot;
 use app\modules\v1\core\Action;
 use app\services\AirCMSService;
 use app\services\AlarmService;
-use app\services\ManagerService;
+use app\services\MessageService;
 
 class AlarmManagerAction extends Action
 {
     /* @var $alarmService AlarmService */
     public $alarmService;
 
-    /* @var $manageService ManagerService */
-    public $manageService;
+    /* @var $messageService MessageService */
+    public $messageService;
 
     /* @var $airCmsService AirCMSService */
     public $airCmsService;
@@ -22,7 +22,7 @@ class AlarmManagerAction extends Action
     public function init(): void
     {
         $this->alarmService = Bot::$container->get(AlarmService::class);
-        $this->manageService = Bot::$container->get(ManagerService::class);
+        $this->messageService = Bot::$container->get(MessageService::class);
         $this->airCmsService = Bot::$container->get(AirCMSService::class);
     }
 
@@ -30,7 +30,7 @@ class AlarmManagerAction extends Action
     {
         try {
             if($msg = $this->alarmService->getAlarmMessage($this->airCmsService->getData())) {
-                $this->manageService->sendSimpleMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
+                $this->messageService->sendMessageByChatId($msg, getenv('TELEGRAM_INFO_CHANNEL_ID'));
                 echo '+';
             }
         } catch (\Throwable $e) {
