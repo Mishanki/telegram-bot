@@ -10,13 +10,11 @@ class HTTPService
      */
     public function sendMessage(string $msg)
     {
-        return file_get_contents($this->getBotWithToken().'?'.http_build_query([
+        return $this->send([
             'chat_id' => getenv('TELEGRAM_CHAT_ID'),
             'text' => $msg,
             'parse_mode' => 'markdown',
-        ]));
-
-
+        ]);
     }
 
     /**
@@ -26,11 +24,29 @@ class HTTPService
      */
     public function sendMessageChatId(string $msg, string $chatId)
     {
-        return file_get_contents($this->getBotWithToken().'?'.http_build_query([
-                'chat_id' => $chatId,
-                'text' => $msg,
-                'parse_mode' => 'markdown',
-            ]));
+        return $this->send([
+            'chat_id' => $chatId,
+            'text' => $msg,
+            'parse_mode' => 'markdown',
+        ]);
+    }
+
+    /**
+     * @param array $data
+     * @return false|string
+     */
+    private function send(array $data)
+    {
+        return file_get_contents(
+            $this->getBotWithToken().'?'.http_build_query($data),
+            false,
+            stream_context_create([
+                "ssl" => [
+                    "verify_peer" => false,
+                    "verify_peer_name" => false,
+                ],
+            ])
+        );
     }
 
     /**
