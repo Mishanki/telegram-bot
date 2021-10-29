@@ -21,6 +21,9 @@ class MainHTTP implements MainHTTPInterface
      */
     public function getDataFromUrl(string $host, ?array $data = null)
     {
+        if ($data) {
+            $host .= '?'.http_build_query($data);
+        }
         return file_get_contents(
             $host,
             false,
@@ -37,7 +40,7 @@ class MainHTTP implements MainHTTPInterface
      * @param array $data
      * @return false|string
      */
-    public function send(array $data)
+    private function send(array $data)
     {
         return file_get_contents($this->getBotWithToken().'?'.http_build_query($data), false,
             stream_context_create([
@@ -52,7 +55,7 @@ class MainHTTP implements MainHTTPInterface
     /**
      * @return string
      */
-    public function getBotWithToken(): string
+    private function getBotWithToken(): string
     {
         return str_replace('<token>', getenv('TELEGRAM_BOT_TOKEN'), getenv('TELEGRAM_BOT_URL'));
     }

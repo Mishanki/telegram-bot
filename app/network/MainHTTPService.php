@@ -23,7 +23,7 @@ class MainHTTPService implements MainHTTPServiceInterface
      */
     public function request(string $host, ?array $data = null)
     {
-        return $this->mainHTTP->getDataFromUrl($host);
+        return $this->mainHTTP->getDataFromUrl($host, $data);
     }
 
     /**

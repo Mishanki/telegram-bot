@@ -81,15 +81,13 @@ class AirCMSService
         return $resultMsg;
     }
 
-
-
     /**
      * @return array
      * @throws Exception
      */
     public function getData(): array
     {
-        if(!$json = $this->httpService->request(getenv('AIRCMS_API_HOST').'?T=0')) {
+        if(!$json = $this->httpService->request(getenv('AIRCMS_API_HOST'), ['T'=>0])) {
             throw new Exception('Json is empty');
         }
 
