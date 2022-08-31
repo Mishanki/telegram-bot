@@ -50,7 +50,7 @@ class SensorPmObject
         [
             'city' => 'Коломна',
             'str' => 'ул. Добролюбова, 17',
-            'sid' => 8550232,
+            'sid' => 71947,
             'airCmsId' => null,
         ],
     ];
