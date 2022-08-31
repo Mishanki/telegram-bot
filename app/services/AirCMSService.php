@@ -70,7 +70,7 @@ class AirCMSService
             $resultMsg .= 'Темп-ра  -  ' . $item['ds18b20_temperature'] . ' °C' . PHP_EOL;
             $resultMsg .= 'Влаж-ть  -  ' . $item['humidity'] . ' %' . PHP_EOL;
             $resultMsg .= 'Давл-е  -  ' . $item['pressure'] . ' мм рт. ст.'. PHP_EOL;
-//            $resultMsg .= 'Ветер ('.Utils::windPowerBeaufort($item['wind_speed']).')  -  ' . Utils::windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
+            $resultMsg .= 'Ветер ('.Utils::windPowerBeaufort($item['wind_speed']).')  -  ' . Utils::windDirectionTranslate($item['wind_direction']) . ', ' . $item['wind_speed'] . ' м/с'. PHP_EOL;
 
             $resultMsg .=  PHP_EOL;
 
