@@ -29,11 +29,13 @@ class HookManagerAction extends Action
         if (boolval(getenv('DEBUG_MODE'))) {
             $msg = file_get_contents('php://input');
             $msg = json_decode($msg, true);
-            $msg = json_encode($msg, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+            if ($msg['message']['chat']['type'] == 'private') {
+                $msg = json_encode($msg, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 
-            /* @var $message MessageService */
-            $message = Bot::$container->get(MessageService::class);
-            $message->sendMessageByChatId($msg);
+                /* @var $message MessageService */
+                $message = Bot::$container->get(MessageService::class);
+                $message->sendMessageByChatId($msg);
+            }
         }
     }
 }
