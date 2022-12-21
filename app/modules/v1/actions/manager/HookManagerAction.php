@@ -26,7 +26,7 @@ class HookManagerAction extends Action
 
     public function beforeRun()
     {
-        if (boolval(getenv('DEBUG_MODE'))) {
+        if (getenv('DEBUG_MODE')) {
             $msg = file_get_contents('php://input');
             $msg = json_decode($msg, true);
             if ($msg['message']['chat']['type'] == 'private') {
